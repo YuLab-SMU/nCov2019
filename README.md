@@ -12,7 +12,7 @@ Therapeutics data:  [raps.org](https://www.raps.org/news-and-articles/news-artic
 
 Fetching data using API provided by [disease.sh](https://disease.sh)
 
-**For more details see our [vignette](https://yulab-smu.top/nCov2019/).**
+**Find out more on the vignette [vignette](https://yulab-smu.top/nCov2019/).**
 
 
 ## :writing\_hand: Authors
@@ -35,6 +35,8 @@ Get the development version from github:
 ## install.packages("remotes")
 remotes::install_github("YuLab-SMU/nCov2019")
 ```
+
+## :beginner: Usages
 
 + `get_nCov2019()` to query online latest information
 + `load_nCov2019()` to get historical data
