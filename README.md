@@ -2,7 +2,17 @@
 
 ## :house: Data Sources
 
-**For more details see our [vignette](https://guangchuangyu.github.io/nCov2019/), [Preprint](https://www.medrxiv.org/content/10.1101/2020.02.25.20027433v2), and [Shiny app](http://www.bcloud.org/e/).**
+For latest data: [worldometers](https://www.worldometers.info/coronavirus/)
+
+For historical data: [JHUCSSE](https://coronavirus.jhu.edu/map.html)
+
+For vaccine data: [raps.org](https://www.raps.org/news-and-articles/news-articles/2020/3/covid-19-vaccine-tracker)
+
+For therapeutics data:  [raps.org](https://www.raps.org/news-and-articles/news-articles/2020/3/covid-19-therapeutics-tracker)
+
+Data Fetching with API provided by [disease.sh](disease.sh)
+
+**For more details see our [vignette](https://YuLab-SMU.github.io/nCov2019/), [Preprint](https://www.medrxiv.org/content/10.1101/2020.02.25.20027433v2), and [Shiny app](http://www.bcloud.org/e/).**
 
 
 ## :writing\_hand: Authors

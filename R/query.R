@@ -5,7 +5,7 @@ query <- function(){
     message("Querying the latest data...")
     latest_data <- get_latest_data();print(latest_data)
     message("Querying the global data...")
-    global_data <- get_global_data();print(global_data)
+    global_data <- get_global_data();summary(global_data)
     message("Querying the historical data...")
     historical_data <- get_history_data()
     message("Querying the vaccine data...")
@@ -49,10 +49,7 @@ get_global_data <- function() {
     local <-  file.path("local_storage","global_data.json")
     data <- dl(url,local)
     data$updated =  as.character(strptime(data$updated,"%OS"))
-    res = list(
-        table = data,
-        time = max(data$updated)
-    )
+    res = data.frame(data)
     class(res) = "global_summary"
     return(res)
 }
@@ -143,6 +140,26 @@ get_therapeutics_data <- function() {
         totalCandidates = data$totalCandidates
     )
     class(res) = "vaccine_therapeutics"
+    return(res)
+}
+
+#' Get latest data;deprecated
+#' 
+#' @export
+get_nCov2019  <- function(){
+    message("`get_nCov2019()` has been deprecated and used `query()` instead of")
+    message("Querying the latest data...")
+    res <- get_latest_data()
+    return(res)
+}
+
+#' Get historical data;deprecated
+#'
+#' @export
+load_nCov2019  <- function(){
+    message("`load_nCov2019()` has been deprecated and used `query()` instead of.")
+    message("Querying the historical data...")
+    res <- get_history_data()
     return(res)
 }
 

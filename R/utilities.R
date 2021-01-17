@@ -36,8 +36,19 @@
 
 ##' @method summary vaccine_therapeutics
 ##' @export
-summary.vaccine_therapeutics <- function(x, ...){
-  return(x$summary)
+summary.vaccine_therapeutics <- function(object, ...){
+  return(object$summary)
+}
+
+
+##' @method summary global_summary
+##' @export
+summary.global_summary <- function(object, ...) {
+  x <- object
+  cat("Gloabl total ", x$cases, " cases; and ", x$deaths," deaths" )
+  cat("\nGloabl total affect country or areas:", x$affectedCountries)
+  cat("\nGloabl total recovered cases:", x$todayRecovered)
+  cat("\nlast update:", x$updated, "\n")
 }
 
 
