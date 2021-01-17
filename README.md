@@ -1,29 +1,25 @@
-# nCov2019: An R package with real-time data, historical data and Shiny app
+# nCov2019: An R package with real-time data, historical data and Shiny app for exploring COVID-19 statistics
 
 ## :house: Data Sources
 
-For latest data: [worldometers](https://www.worldometers.info/coronavirus/)
+Latest data  of coronavirus cases: [worldometers](https://www.worldometers.info/coronavirus/)
 
-For historical data: [JHUCSSE](https://coronavirus.jhu.edu/map.html)
+Historical data of coronavirus cases : [JHUCSSE](https://coronavirus.jhu.edu/map.html)
 
-For vaccine data: [raps.org](https://www.raps.org/news-and-articles/news-articles/2020/3/covid-19-vaccine-tracker)
+Vaccine data: [raps.org](https://www.raps.org/news-and-articles/news-articles/2020/3/covid-19-vaccine-tracker)
 
-For therapeutics data:  [raps.org](https://www.raps.org/news-and-articles/news-articles/2020/3/covid-19-therapeutics-tracker)
+Therapeutics data:  [raps.org](https://www.raps.org/news-and-articles/news-articles/2020/3/covid-19-therapeutics-tracker)
 
-Data Fetching with API provided by [disease.sh](disease.sh)
+Fetching data using API provided by [disease.sh](https://disease.sh)
 
-**For more details see our [vignette](https://YuLab-SMU.github.io/nCov2019/), [Preprint](https://www.medrxiv.org/content/10.1101/2020.02.25.20027433v2), and [Shiny app](http://www.bcloud.org/e/).**
+**For more details see our [vignette](https://yulab-smu.top/nCov2019/).**
 
 
 ## :writing\_hand: Authors
 
-+ Guangchuang YU (package creator and maintainer)
-    - School of Basic Medical Sciences, Southern Medical University
-    - <https://guangchuangyu.github.io>
-+ Xijin Ge (Shiny app)
-    - Department of Mathematics and Statistics, South Dakota State University
-    - <https://www.sdstate.edu/directory/xijin-ge>
-+ Tianzhi Wu, Erqiang Hu and Patrick Tung (contributors)
+Guangchuang YU and Tianzhi Wu
+
+<https://yulab-smu.top>
 
 
 If you use `nCov2019`, please cite the following preprint:
@@ -37,7 +33,7 @@ Get the development version from github:
 
 ``` r
 ## install.packages("remotes")
-remotes::install_github("GuangchuangYu/nCov2019")
+remotes::install_github("YuLab-SMU/nCov2019")
 ```
 
 + `get_nCov2019()` to query online latest information
@@ -55,7 +51,7 @@ Run the script [example.R](example.R) in R using `source("example.R")`, will pro
 
 ## :book: Documents
 
-+ **online vignette**: [nCov2019 for studying COVID-19 coronavirus outbreak](https://guangchuangyu.github.io/nCov2019/)
++ **online vignette**: [nCov2019 for studying COVID-19 coronavirus outbreak](https://yulab-smu.top/nCov2019/)
 + [An R Package to Explore the Novel Coronavirus](https://towardsdatascience.com/an-r-package-to-explore-the-novel-coronavirus-590055738ad6)
 + [检索疫情数据的R包来了](https://mp.weixin.qq.com/s/_0D8ENb-4lGm4UV16Ok28A)
 + [各省市的疫情历史数据来了！](https://mp.weixin.qq.com/s/lrQWGKj-mReWrxfi_4Sw9A)
