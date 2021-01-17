@@ -10,7 +10,7 @@
   continuous_scale = FALSE,
   palette = "Reds",
   date = NULL,
-  title = "",
+  title = "COVID19",
   type = "cases",
   ...
 )

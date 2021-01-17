@@ -1,16 +1,32 @@
 ---
 title: "nCov2019: A R package for studying COVID-19 coronavirus outbreak"
-output: html_document
+author:
+- name: Tianzhi Wu, Erqiang Hu, Patrick Tung, Xijin Ge, Guangchuang Yu
+    
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    latex_engine: xelatex
+  prettydoc::html_pretty:
+    toc: true
+    theme: cayman
+    highlight: github
+package: nCov2019
+vignette: |
+  %\VignetteIndexEntry{nCov2019 introduction}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
 ---
 
 
-To provide convenient access to epidemiological data on the coronavirus outbreak, we developed an R package, nCov2019 (https://github.com/GuangchuangYu/nCov2019). Besides detailed basis statistics, it also includes information about vaccine development and therapeutics candidates. We redesigned the function plot() for geographic maps visualization and provided a  interactive shiny app. These analytics tools could be useful in informing the public and studying how this and similar viruses spread in populous countries.
+To provide convenient access to epidemiological data on the coronavirus outbreak, we developed an R package, nCov2019 (https://github.com/yulab-smu/nCov2019). Besides detailed basis statistics, it also includes information about vaccine development and therapeutics candidates. We redesigned the function plot() for geographic maps visualization and provided a  interactive shiny app. These analytics tools could be useful in informing the public and studying how this and similar viruses spread in populous countries.
 
 ## Installation
+
 To start off, users could utilize the ‘remotes’ package to install it directly from GitHub by running the following in R:
 ```{r eval=FALSE}
 library('remotes')
-remotes::install_github("GuangchuangYu/nCov2019", dependencies = TRUE)
+remotes::install_github("yulab-smu/nCov2019", dependencies = TRUE)
 ```
 
 
@@ -26,40 +42,44 @@ This may take seconds to few minutes, which depend on the users' network connect
 
 The result returned by `query()` function will contains 5 types of statistic:  
 
-- global    The global overall summary statistic  
-- latest    The global latest statistic for all countries
-- historical    The historical statistic for all countries
-- vaccine   The current vaccine development progress
-- therapeutics    The current therapeutics development progress
-
-The `query()` only need to be performed once in a session, print each of statistic objects, users could get their update time. And for the `vaccine` and `therapeutics` query results, print them will return the candidates number.
 
 ```{r}
-x <- res$latest
-print(x)
+names(res)
 ```
+- `global`    The global overall summary statistic  
+- `latest`   The global latest statistic for all countries
+- `historical`    The historical statistic for all countries
+- `vaccine`   The current vaccine development progress
+- `therapeutics`    The current therapeutics development progress
+
+The `query()` only need to be performed once in a session, print each of statistic objects, users could get their update time. And for the `vaccine` and `therapeutics` query results, print them will return the candidates number.
 
 
 ### global data
 
-The query resujlt of global status will contain a data frame with 21 types of statistic, which have detail explanation on the bottom of this documents.
+The query result of global status will contain a data frame with 21 types of statistic, which have detail explanation on the bottom of this documents. And `summary(x)` will return overview of global status.
+
 ```{r}
 x = res$global
-names(x$table) 
+x$affectedCountries # total affected countries
+summary(x)
 ```
 
 
 
 ### latest data
 
-Here is the example for operate latest data.
+Here is the example for operating latest data. once again, all data have queried and store in `res`.
 ```{r}
 x = res$latest
+```
+
+And then `print(x)` will return the update time for the latest data
+```{r}
 print(x) # check update time
 ```
 
-
-To subset latest data could be easily done by using `[`. `x["Global"]` or x`["global"]` will return the data frame for all countries  and users could determine a specific country, such as:
+To subset latest data could be easily done by using `[`.  `x["Global"]` or x`["global"]` will return the data frame for all countries but users could determine a specific country, such as:
 ```{r}
 head(x["Global"]) # return all global countries.
 x[c("USA","India")] # return only for USA and Inida 
@@ -70,6 +90,7 @@ The data is order by "todayCases" column, users could sort them by other order.
 df = x["Global"]
 head(df[order(df$cases, decreasing = T),])  
 ```
+
 As for the latest data, it provides 11 types of main information by default, but 12 more statistic type are provided in the "latest\$detail", they also have corresponding explanation on the bottom. 
 ```{r,message=FALSE, warning=FALSE}
 x = res$latest
@@ -78,7 +99,7 @@ head(x$detail)  # more detail data
 
 ### historical data
 
-Historical data is useful in retrospective analysis or to establish predictive models,  the operation is similar as  latest data, user could determine the data frame for all country or some specific countries: 
+Historical data is useful in retrospective analysis or to establish predictive models,  the operation is similar as  latest data, user could determine the data frame for all countries or some specific countries: 
 
 ```{r, warning=FALSE}
 Z = res$historical
@@ -148,7 +169,7 @@ It could be also intuitively compare the number of new confirmed cases per day a
 library(ggplot2)
 library(dplyr)
 X <- res$historical
-X$table %>%
+X["global"] %>%
 group_by(country) %>%
 arrange(country,date) %>%
 mutate(diff = cases - lag(cases, default =  first(cases))) -> a
@@ -293,7 +314,7 @@ Plot the global trend in a novel way.
 require(dplyr)
 
 y <- res$historical
-d <- y$table
+d <- y["global"]
 
 time = as.Date("2020-03-19")
 dd <- filter(d, date == time) %>% 
@@ -385,6 +406,7 @@ dashboard could launch as below:
 dashboard()
 ```
 
+![dashboard](./dashboard.png)
 
 ## statistic item explanation
 
