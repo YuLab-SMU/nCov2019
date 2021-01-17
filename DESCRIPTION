@@ -1,0 +1,43 @@
+Package: nCov2019
+Title: Stats of the COVID-19 Cases
+Version: 0.4.0
+Authors@R: c(
+          person("Guangchuang", "Yu", email = "guangchuangyu@gmail.com", role = c("aut", "cre")),
+          person("Tianzhi", "Wu", email = "wutimze@gmail.com", role = "ctb"),
+          person("Erqiang", "Hu", email = "13766876214@163.com", role = "ctb"),
+          person("Patrick", "Tung", email = "tung_patrick@yahoo.com", role = "ctb"),
+          person("Xijin", "Ge", email = "Xijin.Ge@sdstate.edu", role = "ctb")
+          )
+Description: Download statistical number of the COVID-19 cases. 
+Depends: R (>= 3.6.0)
+Imports: 
+    downloader,
+    ggplot2,
+    jsonlite,
+    RColorBrewer
+Suggests: 
+    cowplot,
+    ggplotify,
+    grDevices,
+    maps,
+    magick,
+    shiny,
+    remotes,
+    utils,
+    prettydoc,
+    knitr,
+    rmarkdown,
+    reshape2
+VignetteBuilder: knitr
+License: Artistic-2.0
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.1
+NeedsCompilation: no
+Packaged: 2021-01-12 13:02:54 UTC; Dell
+Author: Guangchuang Yu [aut, cre],
+  Tianzhi Wu [ctb],
+  Erqiang Hu [ctb],
+  Patrick Tung [ctb],
+  Xijin Ge [ctb]
+Maintainer: Guangchuang Yu <guangchuangyu@gmail.com>
