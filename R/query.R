@@ -171,14 +171,12 @@ dl <- function(url,local){
     tryCatch({
         d = tempfile()
         status <- download.file(url, quiet = T, destfile = d)
-        data <- jsonlite::fromJSON(d)
-        return(data)
+        data <- jsonlite::fromJSON(d)        
         },
     error= function(e) {
         message("Failed to query online data, please check the network connection.\n
         A local data  stored on 2021-01-11 will be loaded.")
         data <- jsonlite::fromJSON(system.file(local, package="nCov2019"))
-        return(data)
     })
-
+    return(data)
 }
