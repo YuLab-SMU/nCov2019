@@ -53,7 +53,7 @@ Run the script [example.R](example.R) in R using `source("example.R")`, will pro
 
 ## :book: Documents
 
-+ **online vignette**: [nCov2019 for studying COVID-19 coronavirus outbreak](https://yulab-smu.top/nCov2019/)
++ [online vignette](https://yulab-smu.top/nCov2019/)
 + [An R Package to Explore the Novel Coronavirus](https://towardsdatascience.com/an-r-package-to-explore-the-novel-coronavirus-590055738ad6)
 + [检索疫情数据的R包来了](https://mp.weixin.qq.com/s/_0D8ENb-4lGm4UV16Ok28A)
 + [各省市的疫情历史数据来了！](https://mp.weixin.qq.com/s/lrQWGKj-mReWrxfi_4Sw9A)
