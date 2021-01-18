@@ -8,12 +8,13 @@ res <- query()
 y <- res$historical
 d <- y["global"]
 
-time = as.Date("2020-03-19")
+time = as.Date("2021-01-10")
 dd <- filter(d, date == time) %>% 
   arrange(desc(cases)) 
 
 dd = dd[1:40, ]
 dd$country = factor(dd$country, levels=dd$country)
+k = median(dd$cases)
 
 dd$angle = 1:40 * 360/40
 require(ggplot2)
@@ -26,11 +27,11 @@ p <- ggplot(dd, aes(country, cases, fill=cases)) +
   scale_fill_gradientn(colors=c("darkgreen", "green", "orange", "firebrick","red"), trans="log") + 
   geom_text(aes(label=paste(country, cases, sep="\n"), 
                 y = cases *.8, angle=angle), 
-            data=function(d) d[d$cases > 700,], 
-            size=3, color = "white", fontface="bold", vjust=1)  + 
+            data=function(d) d[d$cases > k,], 
+            size=2, color = "white", fontface="bold", vjust=1)  + 
   geom_text(aes(label=paste0(cases, " cases ", country), 
                 y = max(cases) * 2, angle=angle+90), 
-            data=function(d) d[d$cases < 700,], 
+            data=function(d) d[d$cases < k,], 
             size=3, vjust=0) + 
   coord_polar(direction=-1) + 
   theme_void() + 
@@ -80,7 +81,7 @@ p2 <- ggplot(dd, aes(days_since_1m, cases, color = country)) +
 
 
 require(cowplot)
-pp <- plot_grid(p1, p2, ncol=2, labels=c("A", "B"), 
+pp <- plot_grid(p, p2, ncol=2, labels=c("A", "B"), 
     rel_heights=c(.7, 1))  
 ggsave(pp, filename = "nCov2019.jpg", width=12, height=8)
 

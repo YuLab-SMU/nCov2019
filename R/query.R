@@ -29,7 +29,7 @@ get_latest_data <- function() {
     data <- dl(url,local)
 
     data$updated = sapply(data$updated, function(x){as.character(
-            as.Date(as.POSIXct( 1.610409e+12/1000, origin="1970-01-01")))} )
+            as.Date(as.POSIXct( x/1000, origin="1970-01-01")))} )
     res = list(
         table = data[c("country","cases","deaths","recovered","active","todayCases",
                     "todayDeaths", "todayRecovered","population","tests","updated")],
@@ -50,7 +50,7 @@ get_global_data <- function() {
     local <-  file.path("local_storage","global_data.json.gz")
     data <- dl(url,local)
     data$updated =  as.character(
-            as.Date(as.POSIXct( 1.610409e+12/1000, origin="1970-01-01")))
+            as.Date(as.POSIXct( data$updated/1000, origin="1970-01-01")))
     res = data.frame(data)
     class(res) = "global_summary"
     return(res)
