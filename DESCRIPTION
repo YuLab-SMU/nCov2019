@@ -28,7 +28,11 @@ Suggests:
     prettydoc,
     knitr,
     rmarkdown,
-    reshape2
+    reshape2,
+    dplyr,
+    ggrepel,
+    shadowtext,
+    tidyr
 VignetteBuilder: knitr
 License: Artistic-2.0
 Encoding: UTF-8

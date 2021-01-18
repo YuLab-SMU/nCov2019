@@ -25,10 +25,11 @@ query <- function(){
 ##' @export
 get_latest_data <- function() {
     url <- "https://disease.sh/v3/covid-19/countries?yesterday=1&twoDaysAgo=0&sort=todayCases"
-    local <- file.path("local_storage","latest_data.json")
+    local <- file.path("local_storage","latest_data.json.gz")
     data <- dl(url,local)
 
-    data$updated = sapply(data$updated, function(x){as.character(strptime(x,"%OS"))} )
+    data$updated = sapply(data$updated, function(x){as.character(
+            as.Date(as.POSIXct( 1.610409e+12/1000, origin="1970-01-01")))} )
     res = list(
         table = data[c("country","cases","deaths","recovered","active","todayCases",
                     "todayDeaths", "todayRecovered","population","tests","updated")],
@@ -46,9 +47,10 @@ get_latest_data <- function() {
 ##' @export
 get_global_data <- function() {
     url <- "https://disease.sh/v3/covid-19/all?yesterday=false&twoDaysAgo=0"
-    local <-  file.path("local_storage","global_data.json")
+    local <-  file.path("local_storage","global_data.json.gz")
     data <- dl(url,local)
-    data$updated =  as.character(strptime(data$updated,"%OS"))
+    data$updated =  as.character(
+            as.Date(as.POSIXct( 1.610409e+12/1000, origin="1970-01-01")))
     res = data.frame(data)
     class(res) = "global_summary"
     return(res)
@@ -101,7 +103,7 @@ get_history_data <- function() {
 #' @export
 get_vaccine_data <- function() {
     url <- "https://disease.sh/v3/covid-19/vaccine"
-    local <-  file.path("local_storage","vaccine_data.json")
+    local <-  file.path("local_storage","vaccine_data.json.gz")
     data <- dl(url,local)
     table <- data$data
 
@@ -124,7 +126,7 @@ get_vaccine_data <- function() {
 #' @export
 get_therapeutics_data <- function() {
     url <- "https://disease.sh/v3/covid-19/therapeutics"
-    local <-  file.path("local_storage","therapeutics_data.json")
+    local <-  file.path("local_storage","therapeutics_data.json.gz")
     data <- dl(url,local)
     table <- data$data
 
@@ -174,7 +176,7 @@ dl <- function(url,local){
         },
     error= function(e) {
         message("Failed to query online data, please check the network connection.\n
-        A local stored data will be loaded.")
+        A local data  stored on 2021-01-11 will be loaded.")
         data <- jsonlite::fromJSON(system.file(local, package="nCov2019"))
         return(data)
     })
