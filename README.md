@@ -38,23 +38,23 @@ remotes::install_github("YuLab-SMU/nCov2019")
 ## :beginner: Usages
 
 +  `query()` to query 5 types of statistics
-  + global summary, 
-  + latest data
-  + historical data
-  + vaccine data
-  + therapeutic data
-+ Let ` x` be  global summary data
-  + `summary(x)` will return global  overview
-  + `x$affectedCountries` will return total affected countries, 
+    + global summary
+    + latest data
+    + historical data
+    + vaccine data
+    + therapeutic data
++ Let `x` be  global summary data
+    + `summary(x)` will return global  overview
+    + `x$affectedCountries` will return total affected countries, 
     (other 20 types of statistics is available)
 + Let `y` be  `latest` or `historical` data
-  + `y["global"]` will return all countries' statistics 
-  + `y[country]` will return country level statistics
-  + For countries in  `China`, `UK`, `Australia`,  `Canada` ,`Denmark` ,  `France`  and  `Netherlands`, provincial data is also available and `y[country,province]` will return statistics data of the selected province
+    + `y["global"]` will return all countries' statistics 
+    + `y[country]` will return country level statistics
+    + For countries in  `China`, `UK`, `Australia`,  `Canada` ,`Denmark` ,  `France`  and  `Netherlands`, provincial data is also available and `y[country,province]` will return statistics data of the selected province
 + Let `z` be  `vaccine` or `therapeutic` data
-  + `summary(z)`  will return the summary of  their trial phase
-  + `z["all"]` will return all  candidate 
-  + `z[id="idx"]` will return details of candidate with id = x
+    + `summary(z)`  will return the summary of  their trial phase
+    + `z["all"]` will return all  candidate 
+    + `z[id="idx"]` will return details of candidate with id = x
 + `plot()` to present data on map
 + `dashboard()` to open Shiny app dashboard
 
