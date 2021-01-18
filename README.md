@@ -2,13 +2,10 @@
 
 ## :house: Data Sources
 
-Latest data  of coronavirus cases: [worldometers](https://www.worldometers.info/coronavirus/)
-
-Historical data of coronavirus cases : [JHUCSSE](https://coronavirus.jhu.edu/map.html)
-
-Vaccine data: [raps.org](https://www.raps.org/news-and-articles/news-articles/2020/3/covid-19-vaccine-tracker)
-
-Therapeutics data:  [raps.org](https://www.raps.org/news-and-articles/news-articles/2020/3/covid-19-therapeutics-tracker)
++ Latest data  of coronavirus cases: [worldometers](https://www.worldometers.info/coronavirus/)
++ Historical data of coronavirus cases : [JHUCSSE](https://coronavirus.jhu.edu/map.html)
++ Vaccine data: [raps.org](https://www.raps.org/news-and-articles/news-articles/2020/3/covid-19-vaccine-tracker)
++ Therapeutics data:  [raps.org](https://www.raps.org/news-and-articles/news-articles/2020/3/covid-19-therapeutics-tracker)
 
 Fetching data using API provided by [disease.sh](https://disease.sh)
 
@@ -18,6 +15,8 @@ Fetching data using API provided by [disease.sh](https://disease.sh)
 ## :writing\_hand: Authors
 
 Guangchuang YU and Tianzhi Wu
+
+[![](https://img.shields.io/badge/follow%20me%20on-WeChat-green.svg)](https://yulab-smu.top/images/biobabble.jpg)
 
 <https://yulab-smu.top>
 
@@ -39,19 +38,19 @@ remotes::install_github("YuLab-SMU/nCov2019")
 ## :beginner: Usages
 
 +  `res <- query()` to query 5 types of statistics
-  + global summary, 
-  + latest data
-  + historical data
-  + vaccine data
-  + therapeutic data
-+  ` x <- res$global `  access  global summary data
+    + global summary, 
+    + latest data
+    + historical data
+    + vaccine data
+    + therapeutic data
++  `x <- res$global ` to access  global summary data
     + `summary(x)` will return global  overview
     + `x$affectedCountries` will return total affected countries,(other 20 types of statistics is available)
-+  `y <- res$latest `  or `y <- res$historical `  access  `latest` or `historical` data
++  `y <- res$latest `  or `y <- res$historical ` to access  `latest` or `historical` data
     + `y["global"]` will return all countries' statistics 
     + `y[country]` will return country level statistics
-    + For countries in  `China`, `UK`, `Australia`,  `Canada` ,`Denmark` ,  `France`  and  `Netherlands` `y[country,province]` will return provincial statistics data,
-+ `z <- res$vaccine`  or `y <- res$historical` access  `vaccine` or `therapeutic` data
+    + For countries in  `China`, `UK`, `Australia`,  `Canada` ,`Denmark` ,  `France`  and  `Netherlands`, provincial data is also available and `y[country,province]` will return statistics data of the selected province
++ `z <- res$vaccine`  or `y <- res$therapeutics` to access  `vaccine` or `therapeutic` data
     + `summary(z)`  will return the summary of  their trial phase
     + `z["all"]` will return all  candidate 
     + `z[id="idx"]` will return details of candidate with id = x
