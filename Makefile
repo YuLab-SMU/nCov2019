@@ -33,9 +33,9 @@ check: rd build
 	cd ..;\
 	Rscript -e "rcmdcheck::rcmdcheck('$(PKGNAME)_$(PKGVERS).tar.gz')"
 
-check2: rd build
+check2: rd build2
 	cd ..;\
-	R CMD check $(PKGNAME)_$(PKGVERS).tar.gz
+	R CMD check --no-build-vignettes $(PKGNAME)_$(PKGVERS).tar.gz
 
 clean:
 	cd ..;\
