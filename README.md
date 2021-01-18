@@ -51,12 +51,12 @@ remotes::install_github("YuLab-SMU/nCov2019")
 + Let `y` be  `latest` or `historical` data
   + `y["global"]` will return all countries' statistics 
   + `y[country]` will return country level statistics
-  + For countries in  `China`, `UK`, `Australia`,  `Canada` ,`Denmark` ,  `France`  and  `Netherlands` `y[country,province]` will return provincial statistics data,
+  + For countries in  `China`, `UK`, `Australia`,  `Canada` ,`Denmark` ,  `France`  and  `Netherlands`, provincial data is also available and `y[country,province]` will return statistics data of the selected province
 + Let `z` be  `vaccine` or `therapeutic` data
   + `summary(z)`  will return the summary of  their trial phase
   + `z["all"]` will return all  candidate 
   + `z[id="idx"]` will return details of candidate with id = x
-+ `plot` to present data on map
++ `plot()` to present data on map
 + `dashboard()` to open Shiny app dashboard
 
 ## :art: Example
