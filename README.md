@@ -2,13 +2,10 @@
 
 ## :house: Data Sources
 
-Latest data  of coronavirus cases: [worldometers](https://www.worldometers.info/coronavirus/)
-
-Historical data of coronavirus cases : [JHUCSSE](https://coronavirus.jhu.edu/map.html)
-
-Vaccine data: [raps.org](https://www.raps.org/news-and-articles/news-articles/2020/3/covid-19-vaccine-tracker)
-
-Therapeutics data:  [raps.org](https://www.raps.org/news-and-articles/news-articles/2020/3/covid-19-therapeutics-tracker)
++ Latest data  of coronavirus cases: [worldometers](https://www.worldometers.info/coronavirus/)
++ Historical data of coronavirus cases : [JHUCSSE](https://coronavirus.jhu.edu/map.html)
++ Vaccine data: [raps.org](https://www.raps.org/news-and-articles/news-articles/2020/3/covid-19-vaccine-tracker)
++ Therapeutics data:  [raps.org](https://www.raps.org/news-and-articles/news-articles/2020/3/covid-19-therapeutics-tracker)
 
 Fetching data using API provided by [disease.sh](https://disease.sh)
 
@@ -19,6 +16,7 @@ Fetching data using API provided by [disease.sh](https://disease.sh)
 
 Guangchuang YU and Tianzhi Wu
 
+[![](https://img.shields.io/badge/follow%20me%20on-WeChat-green.svg)](https://yulab-smu.top/images/biobabble.jpg)
 <https://yulab-smu.top>
 
 
