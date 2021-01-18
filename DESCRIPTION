@@ -1,5 +1,5 @@
 Package: nCov2019
-Title: Stats of the COVID-19 Cases
+Title: Exploring COVID-19 Statistics
 Version: 0.4.0
 Authors@R: c(
           person("Guangchuang", "Yu", email = "guangchuangyu@gmail.com", role = c("aut", "cre")),
@@ -9,7 +9,7 @@ Authors@R: c(
           person("Xijin", "Ge", email = "Xijin.Ge@sdstate.edu", role = "ctb")
           )
 Maintainer: Guangchuang Yu <guangchuangyu@gmail.com>          
-Description: Download statistical number of the COVID-19 cases. 
+Description: Provides easy-to-used programming API to access real time and historical data of COVID-19 cases, vaccine and therapeutics data, and a Shiny app to help users exploring the data. 
 Depends: R (>= 3.6.0)
 Imports: 
     downloader,
@@ -35,4 +35,3 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
 NeedsCompilation: no
-Packaged: 2021-01-12 13:02:54 UTC

@@ -149,7 +149,7 @@ fill_scale_continuous <- function(palette = "Reds") {
                 breaks=breaks,labels = labels)
 }
 
-
+##' @title plot.nCov2019History
 ##' @method plot nCov2019History
 ##' @param from start date to plot
 ##' @param to end date to plot. Both from and to should be specify, otherwise they will be ignored.

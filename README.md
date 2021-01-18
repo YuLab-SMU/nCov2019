@@ -1,4 +1,4 @@
-# nCov2019: An R package with real-time data, historical data and Shiny app for exploring COVID-19 statistics
+# nCov2019: An R package for exploring COVID-19 statistics
 
 ## :house: Data Sources
 
