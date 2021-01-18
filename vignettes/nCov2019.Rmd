@@ -5,12 +5,12 @@ author:
     
 date: "`r Sys.Date()`"
 output:
-  pdf_document:
-    latex_engine: xelatex
   prettydoc::html_pretty:
     toc: true
     theme: cayman
     highlight: github
+  pdf_document:
+    toc: true
 package: nCov2019
 vignette: |
   %\VignetteIndexEntry{nCov2019 introduction}
@@ -23,7 +23,7 @@ To provide convenient access to epidemiological data on the coronavirus outbreak
 
 ## Installation
 
-To start off, users could utilize the ‘remotes’ package to install it directly from GitHub by running the following in R:
+To start off, users could utilize the 'remotes' package to install it directly from GitHub by running the following in R:
 ```{r eval=FALSE}
 remotes::install_github("yulab-smu/nCov2019", dependencies = TRUE)
 ```
@@ -204,7 +204,7 @@ plot(y, from = from, to=to)
 ```
 
 
-![overview](./Animations.png)
+![overview](Animations.png)
 
 
 
@@ -404,7 +404,7 @@ dashboard could launch as below:
 dashboard()
 ```
 
-![dashboard](./dashboard.png)
+![dashboard](dashboard.png)
 
 ## statistic item explanation
 
