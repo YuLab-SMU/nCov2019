@@ -169,13 +169,13 @@ It could be also intuitively compare the number of new confirmed cases per day a
 library(ggplot2)
 library(dplyr)
 X <- res$historical
-X["global"] %>%
-group_by(country) %>%
-arrange(country,date) %>%
-mutate(diff = cases - lag(cases, default =  first(cases))) -> a
-tmp = subset(a, country %in% c("Australia", "Japan", "Italy", "Germany",  "China")) 
+tmp <- X["global"] %>%
+  group_by(country) %>%
+  arrange(country,date) %>%
+  mutate(diff = cases - lag(cases, default =  first(cases))) %>%
+  filter(country %in% c("Australia", "Japan", "Italy", "Germany",  "China")) 
 
-p <- ggplot(tmp,aes(date,log(diff+1),color=country)) + geom_line() +
+ggplot(tmp,aes(date,log(diff+1),color=country)) + geom_line() +
   labs(y="Log2(daily increase cases)") + 
   theme(axis.text = element_text(angle = 15, hjust = 1)) +
   scale_x_date(date_labels = "%Y-%m-%d") + 

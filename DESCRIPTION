@@ -9,7 +9,7 @@ Authors@R: c(
           person("Xijin", "Ge", email = "Xijin.Ge@sdstate.edu", role = "ctb")
           )
 Maintainer: Guangchuang Yu <guangchuangyu@gmail.com>          
-Description: Provides easy-to-used programming API to access real time and historical data of COVID-19 cases, vaccine and therapeutics data, and a Shiny app to help users exploring the data. 
+Description: Provides easy-to-use programming API to access real time and historical data of COVID-19 cases, vaccine and therapeutics data, and a Shiny app to help users exploring the data. 
 Depends: R (>= 3.6.0)
 Imports: 
     downloader,
