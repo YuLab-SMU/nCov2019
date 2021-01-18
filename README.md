@@ -53,7 +53,7 @@ remotes::install_github("YuLab-SMU/nCov2019")
 + `z <- res$vaccine`  or `y <- res$therapeutics` to access  `vaccine` or `therapeutic` data
     + `summary(z)`  will return the summary of  their trial phase
     + `z["all"]` will return all  candidate 
-    + `z[id="id1"]` each vaccine or therapeutics candidate has a id, this will return detail description of candidate with "id1"
+    + `z[ID="id1"]` each vaccine or therapeutics candidate has a id, this will return detail description of candidate with "id1"
 + `plot()` to present data on map
 + `dashboard()` to open Shiny app dashboard
 
