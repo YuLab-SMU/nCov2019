@@ -2,7 +2,7 @@
 ##' @export
 `[.nCov2019History` <- function(x, Country, Province, ...) {
   country <- province <- NULL
-  if(Country == "Global" || Country == "global"){
+  if("Global" %in% Country  || "global" %in% Country){
     res = x$table
     }
   else if (missing(Province)){
@@ -18,7 +18,7 @@
 ##' @export
 `[.nCov2019` <- function(x, Country, ...) {
   country <- NULL
-  if(Country == "Global" || Country == "global"){
+  if("Global" %in%  Country || "global" %in% Country){
     res = x$table
   } else {res = subset(x$table, country  %in% Country)}
   return(res)
@@ -28,7 +28,7 @@
 ##' @export
 `[.vaccine_therapeutics` <- function(x, ID, ...) {
   id <- NULL
-  if(ID == "All" || ID == "all"){
+  if("All" %in% ID  || "all" %in% ID){
     res = x$table[,!colnames(x$table) %in% "details"]
   } else {res = subset(x$table, id %in% ID)[,"details"]}
   return(res)

@@ -56,7 +56,7 @@ dd <- d %>%
 breaks=c(1000, 10000, 20000, 50000, 500000,500000,5000000,20000000)
 
 
-p <- ggplot(dd, aes(days_since_1m, cases, color = country)) +
+p2 <- ggplot(dd, aes(days_since_1m, cases, color = country)) +
   geom_smooth(method='lm', aes(group=1),
               data = dd, 
               color='grey10', linetype='dashed') +
@@ -80,7 +80,7 @@ p <- ggplot(dd, aes(days_since_1m, cases, color = country)) +
 
 
 require(cowplot)
-pp <- plot_grid(p2, p, ncol=1, labels=c("B", "C"), 
+pp <- plot_grid(p1, p2, ncol=2, labels=c("A", "B"), 
     rel_heights=c(.7, 1))  
-ggsave(pp, filename = "nCov2019.jpg", width=16, height=11)
+ggsave(pp, filename = "nCov2019.jpg", width=12, height=8)
 

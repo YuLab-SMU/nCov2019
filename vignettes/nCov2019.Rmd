@@ -25,7 +25,6 @@ To provide convenient access to epidemiological data on the coronavirus outbreak
 
 To start off, users could utilize the ‘remotes’ package to install it directly from GitHub by running the following in R:
 ```{r eval=FALSE}
-library('remotes')
 remotes::install_github("yulab-smu/nCov2019", dependencies = TRUE)
 ```
 
@@ -33,7 +32,7 @@ remotes::install_github("yulab-smu/nCov2019", dependencies = TRUE)
 ## Statistic query
 
 Data query is simple as one command:
-```{r 2}
+```{r}
 library("nCov2019")
 res <- query()
 ```
@@ -82,7 +81,7 @@ print(x) # check update time
 To subset latest data could be easily done by using `[`.  `x["Global"]` or x`["global"]` will return the data frame for all countries but users could determine a specific country, such as:
 ```{r}
 head(x["Global"]) # return all global countries.
-x[c("USA","India")] # return only for USA and Inida 
+x[c("USA","India")] # return only for USA and India 
 ```
 
 The data is order by "todayCases" column, users could sort them by other order.
@@ -158,14 +157,14 @@ plot(X)
 
 
 Or To get the overview for the detection testing status, 
-```{r,fig.height=8, fig.width=12, warning=FALSE}
+```{r fig.height=8, fig.width=12, warning=FALSE}
 plot(X, type="tests",palette="Green")
 ```
 
 
  
 It could be also intuitively compare the number of new confirmed cases per day among different countries.
-```{r,fig.height=8, fig.width=12, warning=FALSE}
+```{r fig.height=8, fig.width=12, warning=FALSE}
 library(ggplot2)
 library(dplyr)
 X <- res$historical
@@ -184,7 +183,7 @@ ggplot(tmp,aes(date, log(diff+1), color=country)) + geom_line() +
 
  
 user could also plot the outbreak map on the past time with historical data by specify a date in function plot().
-```{r,fig.height=8, fig.width=12, warning=FALSE}
+```{r fig.height=8, fig.width=12, warning=FALSE}
 Y <- res$historical
 plot(Y, region="Global" ,date = "2020-08-01", type="cases")
 ```
@@ -213,7 +212,7 @@ plot(y, from = from, to=to)
 
 If you wanted to visualize the cumulative summary data, an example plot could be the following:
 
-```{r,fig.height=8, fig.width=12, warning=FALSE}
+```{r fig.height=8, fig.width=12, warning=FALSE}
 library(ggplot2)
 x <- res$historical
 d = x['Japan' ] # you can replace Anhui with any province
@@ -230,7 +229,7 @@ ggplot(d,
 ```
 
 Plot  the trend for for the Top 10  increase cases countries on last day
-```{r,fig.height=8, fig.width=10, warning=FALSE}
+```{r fig.height=8, fig.width=10, warning=FALSE}
 library("dplyr")
 library("ggrepel")
 
@@ -279,7 +278,7 @@ ggplot(d, aes(date, count, color = curve)) + geom_point() + geom_line() +
 ## heatmap for cases per country
 
 Here is the example code for draw a heatmap for the historical data range in nCov2019.
-```{r,fig.height=15, fig.width=6, warning=FALSE}
+```{r fig.height=15, fig.width=6, warning=FALSE}
 library('tidyr')
 library('ggrepel')
 library('ggplot2')
@@ -308,7 +307,7 @@ ggplot(d, aes(date, country)) +
 ```
 
 Plot the global trend in a novel way.
-```{r,fig.height=10, fig.width=10, warning=FALSE}
+```{r fig.height=10, fig.width=10, warning=FALSE}
 
 require(dplyr)
 
@@ -348,7 +347,7 @@ p
 
 
 Number of days since 1 million cases per country 
-```{r,fig.height=8, fig.width=12, warning=FALSE}
+```{r fig.height=8, fig.width=12, warning=FALSE}
 require(dplyr)
 require(ggplot2)
 require(shadowtext)

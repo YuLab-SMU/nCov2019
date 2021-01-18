@@ -1,4 +1,4 @@
-
+##' @rdname plot
 ##' @title plot.nCov2019
 ##' @method plot nCov2019
 ##' @description plot map with ggplots, it is the core of plot.nCov2019 and Plot.nCov2019History.
@@ -24,11 +24,15 @@
 ##' @importFrom ggplot2 labs
 ##' @importFrom ggplot2 aes_string
 ##' @export
-plot.nCov2019 <- function(x, region = "Global", continuous_scale=FALSE, palette = "Reds",date=NULL, title="COVID19", type="cases",... ) {
+plot.nCov2019 <- function(x, region = "Global", continuous_scale = FALSE, palette = "Reds",
+                          date = NULL, title = "COVID19", type = "cases", ... ) {
     country <- NULL
     if (class(x) == "nCov2019"){
-    type_list = c("cases","deaths","recovered","active","todayCases","todayDeaths","todayRecovered","population","tests")
-    } else if(class(x) == "nCov2019History"){type_list = c("cases","deaths","recovered","active")}
+    type_list = c("cases","deaths","recovered","active","todayCases",
+                    "todayDeaths","todayRecovered","population","tests")
+    } else if(class(x) == "nCov2019History"){
+        type_list = c("cases","deaths","recovered","active")
+    }
     
     if (!type %in% type_list ) {
         msg <- paste("`type` should be one of below:\n",
@@ -149,6 +153,7 @@ fill_scale_continuous <- function(palette = "Reds") {
                 breaks=breaks,labels = labels)
 }
 
+##' @rdname plot
 ##' @title plot.nCov2019History
 ##' @method plot nCov2019History
 ##' @param from start date to plot
@@ -157,12 +162,15 @@ fill_scale_continuous <- function(palette = "Reds") {
 ##' @param width width of the plot, only works for animation
 ##' @param height height of the plot, only works for animation
 ##' @param fps fps of the animation, only works for animation
+##' @param filename name of output file.
 ##' @export
 plot.nCov2019History <- function(x, region="Global", 
                                  continuous_scale = TRUE, 
                                  palette = "Reds", date=NULL,
                                  from = NULL, to = NULL, 
-                                 width = 600, height = 600, filename = "nCov2019.gif", fps=2, type, ...) {
+                                 width = 600, height = 600, 
+                                 filename = "nCov2019.gif",
+                                 fps=2, type="cases", ...) {
     if (is.null(from) || is.null(to)) {
          
         p <- plot.nCov2019(x = x, date=date,
