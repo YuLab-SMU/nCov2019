@@ -38,10 +38,24 @@ remotes::install_github("YuLab-SMU/nCov2019")
 
 ## :beginner: Usages
 
-+ `get_nCov2019()` to query online latest information
-+ `load_nCov2019()` to get historical data
-+ `nCov2019_set_country()` to set  country options
-+ `summary` and `[` to access data
++  `query()` to query 5 types of statistics
+  + global summary, 
+  + latest data
+  + historical data
+  + vaccine data
+  + therapeutic data
++ Let ` x` be  global summary data
+  + `summary(x)` will return global  overview
+  + `x$affectedCountries` will return total affected countries, 
+    (other 20 types of statistics is available)
++ Let `y` be  `latest` or `historical` data
+  + `y["global"]` will return all countries' statistics 
+  + `y[country]` will return country level statistics
+  + For countries in  `China`, `UK`, `Australia`,  `Canada` ,`Denmark` ,  `France`  and  `Netherlands` `y[country,province]` will return provincial statistics data,
++ Let `z` be  `vaccine` or `therapeutic` data
+  + `summary(z)`  will return the summary of  their trial phase
+  + `z["all"]` will return all  candidate 
+  + `z[id="idx"]` will return details of candidate with id = x
 + `plot` to present data on map
 + `dashboard()` to open Shiny app dashboard
 
@@ -49,22 +63,12 @@ remotes::install_github("YuLab-SMU/nCov2019")
 
 Run the script [example.R](example.R) in R using `source("example.R")`, will produce the following figure:
 
-![](nCov2019.jpg)
+![](./nCov2019.jpg)
 
 ## :book: Documents
 
 + [online vignette](https://yulab-smu.top/nCov2019/)
 + [An R Package to Explore the Novel Coronavirus](https://towardsdatascience.com/an-r-package-to-explore-the-novel-coronavirus-590055738ad6)
-+ [检索疫情数据的R包来了](https://mp.weixin.qq.com/s/_0D8ENb-4lGm4UV16Ok28A)
-+ [各省市的疫情历史数据来了！](https://mp.weixin.qq.com/s/lrQWGKj-mReWrxfi_4Sw9A)
-+ [一次搞定所有的疫情地图](https://mp.weixin.qq.com/s/iWyOvOoLDl2q9VCUEDY52A)
-+ [nCov2019：历史数据实现自动更新](https://mp.weixin.qq.com/s/wTqeSVWZCH3YP8YzAj20EQ)
-+ [nCov2019英文版，歪果仁也能用这次武汉疫情的数据了](https://mp.weixin.qq.com/s/u50yCKAGJfrcXgvHHhLbsA)
-+ [新冠全球历史数据来了](https://mp.weixin.qq.com/s/tTmd7IJt9U9en62Hl1kBnw)
-+ [当病毒R包nCov-2019遇上动图gganimate](https://mp.weixin.qq.com/s/54cAS4jOJEJw3_SvRJUjDg)
-+ [爆款风玫瑰图：新冠肺炎全球疫情形势](https://mp.weixin.qq.com/s/ZIZr9zmxVIqjlAFQdK-t7A)
-+ [螺旋的疫情图](https://mp.weixin.qq.com/s/lY1TpDqrMce5fB0_GsTlgA)
-+ [欧洲很方，一不小心都要「意大利」了](https://mp.weixin.qq.com/s/m1FW20a7RJUhZ7MISkPrrg)
 
 
 ## :chart\_with\_upwards\_trend: Shiny Apps that use `nCov2019`
@@ -80,4 +84,3 @@ Run the script [example.R](example.R) in R using `source("example.R")`, will pro
 + [Open-Source-COVID-19](https://weileizeng.github.io/Open-Source-COVID-19/)
 + [Top 7 R resources on COVID-19 Coronavirus](https://www.statsandr.com/blog/top-r-resources-on-covid-19-coronavirus/)
 + [COVID-19 Coronavirus Disease resources](http://covirusd.com/resources/)
-
