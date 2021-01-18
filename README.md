@@ -1,5 +1,8 @@
 # nCov2019: An R package for exploring COVID-19 statistics
 
+The package was developed since Feb. 2020 and originally hosted on [GuangchuangYu/nCov2019](https://github.com/GuangchuangYu/nCov2019). This repo contains an up-to-date version with data from new sources (from worldometers and JHUCSSE) and new data types (vaccine and therapeutics data).
+
+
 ## :house: Data Sources
 
 + Latest data  of coronavirus cases: [worldometers](https://www.worldometers.info/coronavirus/)
@@ -8,6 +11,7 @@
 + Therapeutics data:  [raps.org](https://www.raps.org/news-and-articles/news-articles/2020/3/covid-19-therapeutics-tracker)
 
 Fetching data using API provided by [disease.sh](https://disease.sh)
+
 
 **Find out more on the vignette [vignette](https://yulab-smu.top/nCov2019/).**
 
