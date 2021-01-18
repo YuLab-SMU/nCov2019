@@ -43,17 +43,17 @@ remotes::install_github("YuLab-SMU/nCov2019")
     + historical data
     + vaccine data
     + therapeutic data
-+  `x <- res$global ` to access  global summary data
++  `x <- res$global` to access  global summary data
     + `summary(x)` will return global  overview
     + `x$affectedCountries` will return total affected countries,(other 20 types of statistics is available)
-+  `y <- res$latest `  or `y <- res$historical ` to access  `latest` or `historical` data
++  `y <- res$latest`  or `y <- res$historical` to access  `latest` or `historical` data
     + `y["global"]` will return all countries' statistics 
     + `y[country]` will return country level statistics
     + For countries in  `China`, `UK`, `Australia`,  `Canada` ,`Denmark` ,  `France`  and  `Netherlands`, provincial data is also available and `y[country,province]` will return statistics data of the selected province
 + `z <- res$vaccine`  or `y <- res$therapeutics` to access  `vaccine` or `therapeutic` data
     + `summary(z)`  will return the summary of  their trial phase
-    + `z["all"]` will return all  candidate 
-    + `z[ID="id1"]` each vaccine or therapeutics candidate has a id, this will return detail description of candidate with "id1"
+    + `z["all"]` will return all candidate 
+    + `z[ID="id1"]` each vaccine or therapeutics candidate has an id, this will return detail description of the selected candidate (*e.g.*, "id1")
 + `plot()` to present data on map
 + `dashboard()` to open Shiny app dashboard
 

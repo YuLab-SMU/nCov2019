@@ -2,6 +2,7 @@
 % Please edit documentation in R/plot.R
 \name{plot.nCov2019}
 \alias{plot.nCov2019}
+\alias{plot.nCov2019History}
 \title{plot.nCov2019}
 \usage{
 \method{plot}{nCov2019}(
@@ -11,6 +12,22 @@
   palette = "Reds",
   date = NULL,
   title = "COVID19",
+  type = "cases",
+  ...
+)
+
+\method{plot}{nCov2019History}(
+  x,
+  region = "Global",
+  continuous_scale = TRUE,
+  palette = "Reds",
+  date = NULL,
+  from = NULL,
+  to = NULL,
+  width = 600,
+  height = 600,
+  filename = "nCov2019.gif",
+  fps = 2,
   type = "cases",
   ...
 )
@@ -34,6 +51,19 @@ The list of available palettes can found in the Palettes section.}
 \item{type}{Specify the type of Statistics.}
 
 \item{...}{Additional parameters.}
+
+\item{from}{start date to plot}
+
+\item{to}{end date to plot. Both from and to should be specify, otherwise they will be ignored.
+If both from and to are specify, an animation will be created.}
+
+\item{width}{width of the plot, only works for animation}
+
+\item{height}{height of the plot, only works for animation}
+
+\item{filename}{name of output file.}
+
+\item{fps}{fps of the animation, only works for animation}
 }
 \description{
 plot map with ggplots, it is the core of plot.nCov2019 and Plot.nCov2019History.
