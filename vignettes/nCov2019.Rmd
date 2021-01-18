@@ -175,12 +175,11 @@ tmp <- X["global"] %>%
   mutate(diff = cases - lag(cases, default =  first(cases))) %>%
   filter(country %in% c("Australia", "Japan", "Italy", "Germany",  "China")) 
 
-ggplot(tmp,aes(date,log(diff+1),color=country)) + geom_line() +
+ggplot(tmp,aes(date, log(diff+1), color=country)) + geom_line() +
   labs(y="Log2(daily increase cases)") + 
   theme(axis.text = element_text(angle = 15, hjust = 1)) +
   scale_x_date(date_labels = "%Y-%m-%d") + 
   theme_minimal()
-p
 ```
 
  
