@@ -5,6 +5,7 @@ library(ggplot2)
 library(shinydashboard)
 library(plotly)
 library(dplyr)
+library(nCov2019)
 
 ui <- dashboardPage(
   dashboardHeader(title = "nCov2019 Dashboard"),
