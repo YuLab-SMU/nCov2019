@@ -2,8 +2,8 @@ Package: nCov2019
 Title: Exploring COVID-19 Statistics
 Version: 0.4.0
 Authors@R: c(
-          person("Tianzhi", "Wu", email = "wutimze@gmail.com", c("aut", "cre")),
-          person("Guangchuang", "Yu", email = "guangchuangyu@gmail.com", role = c("aut", "cre")),          
+          person("Tianzhi", "Wu", email = "wutimze@gmail.com", role = c("aut", "cre")),
+          person("Guangchuang", "Yu", email = "guangchuangyu@gmail.com", role = "aut"),          
           person("Erqiang", "Hu", email = "13766876214@163.com", role = "ctb"),
           person("Patrick", "Tung", email = "tung_patrick@yahoo.com", role = "ctb"),
           person("Xijin", "Ge", email = "Xijin.Ge@sdstate.edu", role = "ctb")
@@ -34,7 +34,7 @@ Suggests:
     shadowtext,
     tidyr
 VignetteBuilder: knitr
-License: Artistic-2.0
+License: MIT + file LICENSE
 URL: https://github.com/YuLab-SMU/nCov2019
 Encoding: UTF-8
 LazyData: true

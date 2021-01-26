@@ -78,8 +78,7 @@ Run the script [example.R](example.R) in R using `source("example.R")`, will pro
 + [Coronavirus Tracking dashboard](https://coronavirus.john-coene.com/)
 + [Novel Coronavirus Pneumonia (NCP-2019) Dashboard](https://github.com/gaospecial/NCPdashboard)
 + [Coronavirus COVID-19 outbreak statistics and forecast](http://www.bcloud.org/e/)
-+ [新冠状病毒统计和预测](http://www.bcloud.org/v/)
-+ [新冠肺炎疫情分析平台](http://14.215.135.56:3838/COVID-19-public/)
+
 
 ## :sparkling\_heart: Collected in resource list
 
