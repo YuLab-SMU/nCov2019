@@ -53,7 +53,10 @@ ui <- dashboardPage(
     ),
 
   dashboardBody(
-    tags$head(tags$style(".shiny-notification {position: fixed; top: 45% ;left: 50%")), 
+    tags$head(tags$style("
+    .shiny-notification {position: fixed; top: 45% ;left: 50%}
+    .logo, .main-sidebar {position: fixed }")), 
+ 
     # header summary
     fluidRow(
       valueBoxOutput(outputId="summary_confirm"),
@@ -83,7 +86,7 @@ ui <- dashboardPage(
       selected = "Global Statistics",
       tabPanel("Global Statistics", 
         shinycssloaders::withSpinner(
-        plotOutput("Global_plot")
+        plotlyOutput("Global_plot",height = '600', width = 'auto')
         )),
       tabPanel("Vaccine Statisics", 
             box(
@@ -258,11 +261,46 @@ server <- function(input, output, session, ...) {
 # bottom panel plots
 
 
-    output$Global_plot <- renderPlot({
+    output$Global_plot <- renderPlotly({
         validate(need(input$type != "", "Loading"))
-        plot(lastest_data,type=input$type, title="")
+        
+        lastest_data$detail$ISO2 = lastest_data$countryInfo$iso2
+        lastest_data$detail$lat = lastest_data$detail$countryInfo$lat
+        lastest_data$detail$long = lastest_data$detail$countryInfo$long
+        lastest_data$detail$ISO3 = lastest_data$detail$countryInfo$iso3
+        df2 <- lastest_data$detail
 
-    })
+        g <- list(
+        scope = 'world',
+        showland = TRUE,
+        showcountries = TRUE,
+        landcolor = toRGB("gray95"),
+        subunitwidth = 1,
+        countrywidth = 1,
+        subunitcolor = toRGB("white"),
+        countrycolor = toRGB("black")
+        )
+
+        # specify map projection/options
+        l <- list(color = toRGB("grey95"), width = 0.5)
+        g2 <- list(
+        showframe = TRUE,
+        showcoastlines = TRUE,
+        projection = list(type = 'Mercator')
+        )
+  
+        fig <- plot_geo(df2 )
+        fig <- fig %>% add_trace(
+        z = ~active, color = ~active, colors = 'Reds', hoverinfo= ~active,
+        text = ~country, locations = ~ISO3
+        )
+        fig <- fig %>% colorbar(title = 'active' )
+        fig <- fig %>% layout(
+        title = '  ',
+        geo = g
+        )
+ 
+})
 
     output$vaccine_table = DT::renderDataTable({
         validate(need( exists("vaccine_data"), "Loading"))
