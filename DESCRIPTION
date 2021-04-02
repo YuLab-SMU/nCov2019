@@ -2,13 +2,14 @@ Package: nCov2019
 Title: Exploring 'COVID'-19 Statistics
 Version: 0.4.2
 Authors@R: c(
-          person("Tianzhi", "Wu", email = "wutimze@gmail.com", role = c("aut", "cre")),
-          person("Guangchuang", "Yu", email = "guangchuangyu@gmail.com", role = "aut"),          
+          person("Guangchuang", "Yu", email = "guangchuangyu@gmail.com",
+                 role = c("cre", "aut"), comment = c(ORCID = "0000-0002-6485-8781")),
+          person("Tianzhi", "Wu", email = "wutimze@gmail.com", role = "aut"),
           person("Erqiang", "Hu", email = "13766876214@163.com", role = "ctb"),
           person("Patrick", "Tung", email = "tung_patrick@yahoo.com", role = "ctb"),
           person("Xijin", "Ge", email = "Xijin.Ge@sdstate.edu", role = "ctb")
           )
-Maintainer: Tianzhi Wu <wutimze@gmail.com>
+Maintainer: Guangchuang Yu <guangchuangyu@gmail.com>
 Description: Provides easy-to-use programming API to access real time and historical data of 'COVID'-19 cases, vaccine and therapeutics data, and a Shiny app to help users exploring the data.  Fetching data using API provided by <https://disease.sh> . 
 Depends: R (>= 3.6.0)
 Imports: 

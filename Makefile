@@ -31,7 +31,7 @@ install:
 
 check: rd build
 	cd ..;\
-	Rscript -e "rcmdcheck::rcmdcheck('$(PKGNAME)_$(PKGVERS).tar.gz')"
+	Rscript -e "rcmdcheck::rcmdcheck('$(PKGNAME)_$(PKGVERS).tar.gz', args='--as-cran')"
 
 check2: rd build2
 	cd ..;\
