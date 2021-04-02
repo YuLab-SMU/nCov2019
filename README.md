@@ -1,6 +1,6 @@
 # nCov2019: An R package for exploring COVID-19 statistics
 
-The package was developed since Feb. 2020 and originally hosted on [GuangchuangYu/nCov2019](https://github.com/GuangchuangYu/nCov2019). This repo contains an up-to-date version with data from new sources (from worldometers and JHUCSSE) and new data types (vaccine and therapeutics data).
+The package was developed since Jan. 2020 and originally hosted on [GuangchuangYu/nCov2019](https://github.com/GuangchuangYu/nCov2019). This repo contains an up-to-date version with data from new sources (from worldometers and JHUCSSE) and new data types (vaccine and therapeutics data).
 
 
 ## :house: Data Sources
