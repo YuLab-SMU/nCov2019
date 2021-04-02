@@ -10,5 +10,12 @@ open_dashboard()
 dashboard()
 }
 \description{
-a shiny app
+A dashboard app for nCov2019 package
+}
+\examples{
+\dontrun{
+dashboard()
+# or
+open_dashboard()
+}
 }

@@ -26,25 +26,6 @@ ui <- dashboardPage(
                         options = list( placeholder = 'Province')),
                     tags$p(""),
 
-    # choose type
-    selectizeInput(
-        'type', label = "Global Statistics Variable", choices = c("cases","deaths","recovered","active","todayCases", "todayDeaths","todayRecovered","population","tests"),
-            options = list(create = TRUE)
-        ), 
-    # choose type
-    selectizeInput(
-        'cor_type1', label = "Cor-Plot Variable X", choices = NULL,options = list(create = TRUE)
-        ), 
-    # choose type
-    selectizeInput(
-        'cor_type2', label = "Cor-Plot Variable Y", choices = NULL,options = list(create = TRUE)
-        ), 
-    # choose country_list2 for wave plot
-    selectizeInput(
-        'country_list2', label = "Click or Delete countries to plot daily increase curve", 
-        choices = NULL,multiple = TRUE,options = list(create = TRUE,multiple = TRUE)
-        ), 
-
     tags$div(
     tags$p("Download chosen data"),
     downloadButton('dataDownload', 'Download'),style = "padding: 12px 15px 0px 15px"),
@@ -85,6 +66,13 @@ ui <- dashboardPage(
       title = "",
       selected = "Global Statistics",
       tabPanel("Global Statistics", 
+        # choose type
+        #selectizeInput(
+        #    'type', label = "Choose Global Statistics", choices = c("cases","deaths","recovered","active","todayCases", "todayDeaths","todayRecovered","population","tests"),
+        #        options = list(create = TRUE)
+        #    ), 
+        # choose date
+        dateInput('date', label = 'Date:', min = '2020-01-22', value =NULL),
         shinycssloaders::withSpinner(
         plotlyOutput("Global_plot",height = '600', width = 'auto')
         )),
@@ -106,7 +94,7 @@ ui <- dashboardPage(
             collapsible = T,
             shinycssloaders::withSpinner(DT::dataTableOutput("Summary_table1")), 
             style = "font-size: 70%;"),
-            box(title = "current vaccine candidates ",
+            box(title = "current vaccine candidates",
             width = 6,
             collapsible = T,
             shinycssloaders::withSpinner(DT::dataTableOutput("Summary_table2")), 
@@ -114,8 +102,16 @@ ui <- dashboardPage(
       ),
       tabPanel("Active per Million", plotlyOutput("active_plot")),
       tabPanel("Deaths per Million", plotlyOutput("Mortality_plot")),
-      tabPanel("Cor Plot", plotlyOutput("cor_plot")),
-      tabPanel("Daily Increase Curve", plotlyOutput("wave_plot"))  
+      tabPanel("Cor Plot", 
+          # choose type
+        tags$div(style = "display: flex;",
+        selectizeInput( 'cor_type1', label = "Variable X", choices = NULL,options = list(create = TRUE)), 
+        selectizeInput( 'cor_type2', label = "Variable Y", choices = NULL,options = list(create = TRUE))), 
+        plotlyOutput("cor_plot")),
+      tabPanel("Daily Increase Curve", 
+            selectizeInput('country_list2', label = "Click or input countries to plot curve", 
+            choices = NULL,multiple = TRUE,options = list(create = TRUE,multiple = TRUE)), 
+            plotlyOutput("wave_plot"))  
     )
     ) # end row
   ) # end dashboard body 
@@ -162,7 +158,12 @@ server <- function(input, output, session, ...) {
     # update province list
     observe({
         province_list <- unique(subset(historical_data$province, country == input$country)$province)
-        updateSelectInput(session, "province", choices = c("All",province_list))
+        if (length(province_list) > 0) {
+            updateSelectInput(session, "province", choices = c("All",province_list))
+        } else {
+            updateSelectInput(session, "province", choices = c("--",province_list))
+        }
+        
     })
     
     # update cor_type list
@@ -178,9 +179,11 @@ server <- function(input, output, session, ...) {
     # update country list2
     country_list <- unique(historical_data$table$country ) 
     updateSelectizeInput(session, 'country_list2', choices = country_list, server = TRUE)
+
+    updateDateInput(session, 'date', value = t, max=t)
     # prepare the table content
     df <- reactive({
-        if ( input$province == "All" ) {
+        if ( input$province == "All" | input$province == "--"  ) {
             x = subset(historical_data$table, country == input$country)
         }
         else {
@@ -229,14 +232,14 @@ server <- function(input, output, session, ...) {
     output$line_plot <- renderPlotly({
         validate(need(input$country != "", "Loading"))
         x = gather(df(), curve, count, -date)
-        p = ggplot(x, aes(date, count, color = curve)) +
-            geom_point() + geom_line() + xlab(NULL) + ylab(NULL) +
+        p = ggplot(x, aes(date, log2(count), color = curve, Counts=count, Type=curve )) +
+            geom_point() + geom_line() + xlab(NULL) + ylab("Log2 of count") +
             scale_color_manual(values=c("#f39c12", "#dd4b39", "#00a65a")) +
             theme_bw() + 
             theme(legend.position = "none") +
                 theme(axis.text = element_text(angle = 15, hjust = 1)) +
                 scale_x_date(date_labels = "%Y-%m-%d")
-        ggplotly(p)
+        ggplotly(p,tooltip=c("x","Counts","Type"))
     })
 
 # data download
@@ -262,13 +265,22 @@ server <- function(input, output, session, ...) {
 
 
     output$Global_plot <- renderPlotly({
-        validate(need(input$type != "", "Loading"))
+        #validate(need(input$type != "", "Loading"))
         
-        lastest_data$detail$ISO2 = lastest_data$countryInfo$iso2
-        lastest_data$detail$lat = lastest_data$detail$countryInfo$lat
-        lastest_data$detail$long = lastest_data$detail$countryInfo$long
-        lastest_data$detail$ISO3 = lastest_data$detail$countryInfo$iso3
-        df2 <- lastest_data$detail
+        geoINFO = data.frame(
+            country = lastest_data$detail$country, 
+            ISO3 = lastest_data$detail$countryInfo$iso3,
+            long = lastest_data$detail$countryInfo$long,
+            lat = lastest_data$detail$countryInfo$lat,
+            population = lastest_data$detail$population
+        )
+        df = subset(historical_data$table ,date == input$date)
+        df2 = merge(df, geoINFO, by='country')
+        #lastest_data$detail$ISO2 = lastest_data$detail$countryInfo$iso2
+        #lastest_data$detail$lat = lastest_data$detail$countryInfo$lat
+        #lastest_data$detail$long = lastest_data$detail$countryInfo$long
+        #lastest_data$detail$ISO3 = lastest_data$detail$countryInfo$iso3
+        #df2 <- lastest_data$detail
 
         g <- list(
         scope = 'world',
@@ -289,17 +301,30 @@ server <- function(input, output, session, ...) {
         projection = list(type = 'Mercator')
         )
   
-        fig <- plot_geo(df2 )
+        fig <- plot_geo(df2,
+                hoverinfo = 'text',
+                text = ~paste(
+                            '</br> Region: ', country,
+                            '</br> Cases: ', cases,
+                            '</br> Deaths: ', deaths,
+                            '</br> Population: ', population,
+                            '</br> </br> Date: ', date 
+                            )
+         )
         fig <- fig %>% add_trace(
-        z = ~active, color = ~active, colors = 'Reds', hoverinfo= ~active,
-        text = ~country, locations = ~ISO3
+#        z = as.formula(paste0("~`", input$type, "`")) , 
+#        color = as.formula(paste0("~`", input$type, "`")), colors = 'Reds', 
+#        hoverinfo= as.formula(paste0("~`", input$type, "`")),
+        z = ~cases,
+        color = ~cases,
+        colors = 'Reds',
+        locations = ~ISO3
         )
-        fig <- fig %>% colorbar(title = 'active' )
+        fig <- fig %>% colorbar(title = "cases" )
         fig <- fig %>% layout(
         title = '  ',
         geo = g
-        )
- 
+        ) 
 })
 
     output$vaccine_table = DT::renderDataTable({
@@ -325,53 +350,55 @@ server <- function(input, output, session, ...) {
         validate(need( exists("lastest_data"), "Loading"))
         df = lastest_data$detail
         df = df[order(df$activePerOneMillion,decreasing = T),] 
-        ggplot(df, aes(country,activePerOneMillion)) + 
+        p <- ggplot(df, aes(country,activePerOneMillion)) + 
             geom_col(color="firebrick")  + scale_x_discrete(limits= df$country) +
             geom_hline(yintercept = mean(df$activePerOneMillion)) + 
-            theme_minimal() +
+            theme_minimal() + ylab("Active cases per million population") +
             theme(  axis.text.x=element_blank(),
                     axis.ticks.x=element_blank(),
                     legend.position = 'none')
+        ggplotly(p, tooltip = c("country","activePerOneMillion"))
     })
 
     output$Mortality_plot <- renderPlotly({
         validate(need( exists("lastest_data"), "Loading"))
         df = lastest_data$detail
         df = df[order(df$deathsPerOneMillion,decreasing = T),] 
-        ggplot(df, aes(country,deathsPerOneMillion)) + 
+        p <- ggplot(df, aes(country,deathsPerOneMillion)) + 
             geom_col(color="firebrick")  + scale_x_discrete(limits= df$country) +
             geom_hline(yintercept = mean(df$deathsPerOneMillion)) + 
-            theme_minimal() +
+            theme_minimal() + ylab('Mortality per million population') +
             theme(  axis.text.x=element_blank(),
                     axis.ticks.x=element_blank(),
                     legend.position = 'none')
+        ggplotly(p, tooltip = c("country","deathsPerOneMillion"))
     })
 
     # cor_plot
     output$cor_plot <- renderPlotly({
         validate(need( exists("lastest_data"), "Loading"))
         df = lastest_data$detail 
-        type1 = input$cor_type1
-        type2 = input$cor_type2
-        p = ggplot(df, aes_string(type1,type2,size=type2, text="country")) + 
-            geom_jitter(color="firebrick") +  
-            theme_minimal() + 
+        x = input$cor_type1
+        y = input$cor_type2
+        p = ggplot(df, aes_string(x,y, color="country")) + 
+            geom_jitter() +  guides(color = FALSE )   +
+            theme_minimal() +  
             labs(subtitle="The size of the dots in the graph corresponds to the number of patients diagnosed today") +
             theme(  axis.text=element_blank(),
                     axis.ticks=element_blank(),
-                    legend.position = 'none' )  
-        
-        ggplotly(p, tooltip = c("country","x","y"))
+                    legend.position = 'none' )    
 })
     # wave_plot
     output$wave_plot <- renderPlotly({
-        validate(need(input$country_list2, "Please Choose At lease one Country from the left side panel"))
+        validate(need(input$country_list2, "Pleas choose some countries"))
         tmp = subset(a, country %in% input$country_list2)
-        p <- ggplot(tmp,aes(date,log(diff+1),color=country)) + geom_line() + 
-                    labs(y="Log2 of daily increase cases") + 
+        tmp$Log2Increase = log2(tmp$diff + 1) 
+        tmp$Increase = tmp$diff
+        p <- ggplot(tmp,aes(date, Log2Increase,color=country, Increase = Increase)) + geom_line()  +
+                    labs(y="Daily increase cases(log2 scale)") + 
                     theme(axis.text = element_text(angle = 15, hjust = 1)) +
                     scale_x_date(date_labels = "%Y-%m-%d") + theme_minimal()
-            ggplotly(p)
+        ggplotly(p, tooltip = c("country","date", "Increase"))
 })
     ### reflash button
     observeEvent(input$reflashButton, {

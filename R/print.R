@@ -1,4 +1,4 @@
-##' @method print nCov2019
+##' @method print nCov2019 
 ##' @export
 print.nCov2019 <- function(x, ...) {
   cat("last update:", x$time, "\n")

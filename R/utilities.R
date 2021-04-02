@@ -4,12 +4,12 @@
   country <- province <- NULL
   if("Global" %in% Country  || "global" %in% Country){
     res = x$table
-    }
+  }
   else if (missing(Province)){
-     res = subset(x$table, country  %in% Country)
+    res = subset(x$table, country  %in% Country)
   } 
   else {
-     res = subset(x$province, country  %in% Country & province  %in% Province)
+    res = subset(x$province, country  %in% Country & province  %in% Province)
   }
   return(res)
 }
@@ -52,15 +52,38 @@ summary.global_summary <- function(object, ...) {
 }
 
 
+##' @title  convert 
+##' @rdname convert
+##' @description Convert users' own data into class of nCov2019History data. Then it could be used in nCov2019.
+##' @param data users' own data, it should contain these 6 column: "country","province","date","cases","deaths","recovered".
+##' @export
+convert <- function(data) {
+  if (sum(c("country","province","date","cases","deaths","recovered") %in% colnames(data)) != 6){
+    stop('Input data should contain these 6 column: "country","province","date","cases","deaths","recovered"')
+  }
+  
+  cases_table <- data[,c("country","date","cases","deaths","recovered")]
+  Pcases_table <- data[,c("country","province","date","cases","deaths","recovered")]
+  
+  res = list(
+    table = cases_table[order(cases_table$country, cases_table$date), ],
+    province = Pcases_table[order(Pcases_table$country, Pcases_table$date), ],
+    time = as.character(max(cases_table$date))
+  )
+  class(res) = "nCov2019History"
+  return(res)
+}
+
+##' @importFrom stats aggregate
 clean_data <- function(data, object, by = "country") {
-    cases_table = data.frame(data$timeline[[object]],check.names = F)
-    if (by == "country") {
-        by <- list(data$country)
-        id <- c("Group.1")
-    } else {
-        by <- list(data$country,data$province)
-        id <- c("Group.1", "Group.2")
-    }
-    tmp = aggregate(x = cases_table,by = by, FUN = sum)
-    return(reshape2::melt(tmp, id = id, value.name = object))
+  cases_table = data.frame(data$timeline[[object]],check.names = F)
+  if (by == "country") {
+    by <- list(data$country)
+    id <- c("Group.1")
+  } else {
+    by <- list(data$country,data$province)
+    id <- c("Group.1", "Group.2")
+  }
+  tmp = aggregate(x = cases_table,by = by, FUN = sum)
+  return(reshape2::melt(tmp, id = id, value.name = object))
 }

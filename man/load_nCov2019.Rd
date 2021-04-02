@@ -2,10 +2,19 @@
 % Please edit documentation in R/query.R
 \name{load_nCov2019}
 \alias{load_nCov2019}
-\title{Get historical data;deprecated}
+\title{Query the latest data}
 \usage{
 load_nCov2019()
 }
+\value{
+The historical statistic data
+}
 \description{
-Get historical data;deprecated
+Query the historical data online;deprecated, 
+use load_nCov2019() in the further.
+}
+\examples{
+\dontrun{
+x <- load_nCov2019()
+}
 }

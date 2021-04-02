@@ -1,16 +1,18 @@
 ---
-title: "nCov2019: A R package for studying COVID-19 coronavirus outbreak"
+title: 'nCov2019: A R package for studying COVID-19 coronavirus outbreak'
 author:
 - name: Tianzhi Wu, Erqiang Hu, Patrick Tung, Xijin Ge, Guangchuang Yu
-    
 date: "`r Sys.Date()`"
 output:
+  html_document:
+    toc: yes
+    df_print: paged
+  pdf_document:
+    toc: yes
   prettydoc::html_pretty:
-    toc: true
+    toc: yes
     theme: cayman
     highlight: github
-  pdf_document:
-    toc: true
 package: nCov2019
 vignette: |
   %\VignetteIndexEntry{nCov2019 introduction}
@@ -18,8 +20,11 @@ vignette: |
   %\VignetteEngine{knitr::rmarkdown}
 ---
 
-
 To provide convenient access to epidemiological data on the coronavirus outbreak, we developed an R package, nCov2019 (https://github.com/yulab-smu/nCov2019). Besides detailed basis statistics, it also includes information about vaccine development and therapeutics candidates. We redesigned the function plot() for geographic maps visualization and provided a  interactive shiny app. These analytics tools could be useful in informing the public and studying how this and similar viruses spread in populous countries.
+
+Our R package is designed for both command line and dashboard interaction analysis,  As show in diagram, while `dashboard()` is the main entry for the GUI explore part, the `query()` is the main function used in CLI explore part, 5 types of data were contain in its return result.  Result type were explain in **Statistic query** part.
+
+![](introduction.png)
 
 ## Installation
 
@@ -45,6 +50,7 @@ The result returned by `query()` function will contains 5 types of statistic:
 ```{r}
 names(res)
 ```
+
 - `global`    The global overall summary statistic  
 - `latest`   The global latest statistic for all countries
 - `historical`    The historical statistic for all countries
@@ -54,7 +60,7 @@ names(res)
 The `query()` only need to be performed once in a session, print each of statistic objects, users could get their update time. And for the `vaccine` and `therapeutics` query results, print them will return the candidates number.
 
 
-### global data
+### Global data
 
 The query result of global status will contain a data frame with 21 types of statistic, which have detail explanation on the bottom of this documents. And `summary(x)` will return overview of global status.
 
@@ -66,7 +72,7 @@ summary(x)
 
 
 
-### latest data
+### Latest data
 
 Here is the example for operating latest data. once again, all data have queried and store in `res`.
 ```{r}
@@ -96,9 +102,9 @@ x = res$latest
 head(x$detail)  # more detail data 
 ```
 
-### historical data
+### Historical data
 
-Historical data is useful in retrospective analysis or to establish predictive models,  the operation is similar as  latest data, user could determine the data frame for all countries or some specific countries: 
+Historical data is useful in retrospective analysis or to establish predictive models,  the operation is similar as  latest data, user could get the data frame for all countries or some specific countries within `c()` vector, such as   `head(Z[c(country1,country2,country3)]) `
 
 ```{r, warning=FALSE}
 Z = res$historical
@@ -108,7 +114,27 @@ head(Z["Global"])
 head(Z[c("China","UK","USA")]) 
 ```
 
-### vaccine and therapeutics data
+For  the following  countries, we provide detail province data, which can be obtained in a similar way but within `[ ` operation: `head(Z[country,province])`
+
+- `Australia` `Canada`  `China`  `Denmark`  `France`  `Netherlands`
+
+```{r, warning=FALSE}
+ head(Z['China','hubei'])
+```
+
+For users' own historical data, we provide a `convert()` function, users could convert other data into class of nCov2019History data, and then explore in nCov2019:
+
+```{r eval=FALSE}
+userowndata <- read.csv("path_to_user_data.csv")
+# userowndata, it should contain these 6 column: 
+# "country","province","date","cases","deaths","recovered"
+Z = convert(data=userowndata)
+head(Z["Global"])
+```
+
+
+
+### Vaccine and therapeutics data
 
 Users could check for the vaccine or therapeutics developing status.  Let x be the vaccine or therapeutics query result, then `summary()` will return the summary of their trial phase, and x["all"] or x["All"] will return the summary information, such as mechanism,  trial Phase, institutions and so on. Then the detail background info will return with provided id, for example x[ID="id3"] or simple as x["id3"].  The same operation could apply to therapeutics data.
 ```{r, warning=FALSE}
@@ -162,7 +188,7 @@ plot(X, type="tests",palette="Green")
 ```
 
 
- 
+
 It could be also intuitively compare the number of new confirmed cases per day among different countries.
 ```{r fig.height=8, fig.width=12, warning=FALSE}
 library(ggplot2)
@@ -181,7 +207,7 @@ ggplot(tmp,aes(date, log(diff+1), color=country)) + geom_line() +
   theme_minimal()
 ```
 
- 
+
 user could also plot the outbreak map on the past time with historical data by specify a date in function plot().
 ```{r fig.height=8, fig.width=12, warning=FALSE}
 Y <- res$historical
@@ -204,7 +230,7 @@ plot(y, from = from, to=to)
 ```
 
 
-![overview](Animations.png)
+![](Animations.png)
 
 
 
@@ -275,7 +301,7 @@ ggplot(d, aes(date, count, color = curve)) + geom_point() + geom_line() +
   scale_x_date(date_labels = "%Y-%m-%d")
 ```
 
-## heatmap for cases per country
+## Heatmap for cases per country
 
 Here is the example code for draw a heatmap for the historical data range in nCov2019.
 ```{r fig.height=15, fig.width=6, warning=FALSE}
@@ -397,14 +423,14 @@ print(p)
 ```
 
 
-## dashboard
+## Dashboard
 
 dashboard could launch as below:
 ```{r eval=FALSE}
 dashboard()
 ```
 
-![dashboard](dashboard.png)
+![](dashboard.png)
 
 ## statistic item explanation
 

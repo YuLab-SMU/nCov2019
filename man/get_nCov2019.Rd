@@ -2,10 +2,19 @@
 % Please edit documentation in R/query.R
 \name{get_nCov2019}
 \alias{get_nCov2019}
-\title{Get latest data;deprecated}
+\title{Query the latest data}
 \usage{
 get_nCov2019()
 }
+\value{
+The latest statistic data
+}
 \description{
-Get latest data;deprecated
+Query the latest data online;deprecated, 
+use get_latest_data() in the further.
+}
+\examples{
+\dontrun{
+x <- get_nCov2019()
+}
 }

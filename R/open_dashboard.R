@@ -1,6 +1,13 @@
 ##' @title Shiny app
 ##' @rdname dashboard
-##' @description a shiny app
+#' @title Dashboard for nCov2019
+##' @description A dashboard app for nCov2019 package
+#' @examples
+#' \dontrun{
+#' dashboard()
+#' # or
+#' open_dashboard()
+#'}
 ##' @importFrom downloader download
 ##' @export 
 open_dashboard <- function() {

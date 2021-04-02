@@ -2,10 +2,10 @@
 % Please edit documentation in R/query.R
 \name{get_latest_data}
 \alias{get_latest_data}
-\title{get data from API}
+\title{Query the latest data online}
 \usage{
 get_latest_data()
 }
 \description{
-get data from API
+Query the latest data online
 }

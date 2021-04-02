@@ -1,6 +1,19 @@
-#' query
-#'
+#' @rdname query
+#' @title Query COVID-19 related statistic data
+#' @description The main function for query nCov2019 related statistic data,
+#' @return result contains 5 types of data: 
+#' * global: The global overall summary statistic
+#' * latest: The global latest statistic for all countries
+#' * historical: The historical statistic for all countries
+#' * vaccine: The current vaccine development progress
+#' * therapeutics: The current therapeutics development progress
+#' @examples
+#' \dontrun{
+#' res <- query()
+#' names(res)
+#'}
 #' @export
+#' @md
 query <- function(){
     message("Querying the latest data...")
     latest_data <- get_latest_data();print(latest_data)
@@ -21,7 +34,7 @@ query <- function(){
     return(res)
 }
 
-##' get data from API
+##' @title Query the latest data online
 ##' @export
 get_latest_data <- function() {
     url <- "https://disease.sh/v3/covid-19/countries?yesterday=1&twoDaysAgo=0&sort=todayCases"
@@ -42,9 +55,7 @@ get_latest_data <- function() {
 
 
 
-##' Get global data
-##'
-##' @export
+# Query the global data online
 get_global_data <- function() {
     url <- "https://disease.sh/v3/covid-19/all?yesterday=false&twoDaysAgo=0"
     local <-  file.path("local_storage","global_data.json.gz")
@@ -57,17 +68,11 @@ get_global_data <- function() {
 }
 
 
-##' historical data
-##'
-##' @importFrom utils download.file
-##' @importFrom stats aggregate
-##' @export
+# Query the historical data online
 get_history_data <- function() {
     url <- "https://disease.sh/v3/covid-19/historical?lastdays=all"
     local <-  file.path("local_storage","historical_data.json")
     data <- dl(url,local)
-
-
 
     cases_table <- clean_data(data = data, object = "cases")
     deaths_table <- clean_data(data = data, object = "deaths")
@@ -98,9 +103,7 @@ get_history_data <- function() {
 
 
 
-#' Get vaccine data
-#'
-#' @export
+# Query the vaccine info online
 get_vaccine_data <- function() {
     url <- "https://disease.sh/v3/covid-19/vaccine"
     local <-  file.path("local_storage","vaccine_data.json.gz")
@@ -121,9 +124,7 @@ get_vaccine_data <- function() {
 }
 
 
-#' Get therapeutics data
-#'
-#' @export
+# Query the therapeutics info online
 get_therapeutics_data <- function() {
     url <- "https://disease.sh/v3/covid-19/therapeutics"
     local <-  file.path("local_storage","therapeutics_data.json.gz")
@@ -145,8 +146,15 @@ get_therapeutics_data <- function() {
     return(res)
 }
 
-#' Get latest data;deprecated
-#' 
+#' @rdname get_nCov2019
+#' @title Query the latest data
+#' @description Query the latest data online;deprecated, 
+##' use get_latest_data() in the further.
+#' @return The latest statistic data
+#' @examples
+#' \dontrun{
+#' x <- get_nCov2019()
+#'}
 #' @export
 get_nCov2019  <- function(){
     message("`get_nCov2019()` has been deprecated and used `query()` instead of")
@@ -155,8 +163,15 @@ get_nCov2019  <- function(){
     return(res)
 }
 
-#' Get historical data;deprecated
-#'
+#' @rdname load_nCov2019
+#' @title Query the latest data
+#' @description Query the historical data online;deprecated, 
+##' use load_nCov2019() in the further.
+#' @return The historical statistic data
+#' @examples
+#' \dontrun{
+#' x <- load_nCov2019()
+#'}
 #' @export
 load_nCov2019  <- function(){
     message("`load_nCov2019()` has been deprecated and used `query()` instead of.")
@@ -166,7 +181,7 @@ load_nCov2019  <- function(){
 }
 
 
-# download 
+##' @importFrom utils download.file
 dl <- function(url,local){
     tryCatch({
         d = tempfile()
