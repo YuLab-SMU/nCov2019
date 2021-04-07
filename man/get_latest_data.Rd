@@ -6,6 +6,12 @@
 \usage{
 get_latest_data()
 }
+\value{
+A 'nCov2019' object
+}
 \description{
-Query the latest data online
+Query global latest statistic for all contries
+}
+\author{
+Guangchuang Yu
 }

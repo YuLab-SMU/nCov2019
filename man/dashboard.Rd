@@ -9,6 +9,9 @@ open_dashboard()
 
 dashboard()
 }
+\value{
+No return value, open shiny app
+}
 \description{
 A dashboard app for nCov2019 package
 }

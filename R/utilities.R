@@ -56,6 +56,7 @@ summary.global_summary <- function(object, ...) {
 ##' @rdname convert
 ##' @description Convert users' own data into class of nCov2019History data. Then it could be used in nCov2019.
 ##' @param data users' own data, it should contain these 6 column: "country","province","date","cases","deaths","recovered".
+##' @return a 'nCov2019History' object
 ##' @export
 convert <- function(data) {
   if (sum(c("country","province","date","cases","deaths","recovered") %in% colnames(data)) != 6){

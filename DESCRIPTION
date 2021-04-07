@@ -1,9 +1,9 @@
 Package: nCov2019
 Title: Exploring 'COVID'-19 Statistics
-Version: 0.4.2
+Version: 0.4.3
 Authors@R: c(
           person("Guangchuang", "Yu", email = "guangchuangyu@gmail.com",
-                 role = c("cre", "aut"), comment = c(ORCID = "0000-0002-6485-8781")),
+                 role = c("cre", "aut", "cph"), comment = c(ORCID = "0000-0002-6485-8781")),
           person("Tianzhi", "Wu", email = "wutimze@gmail.com", role = "aut"),
           person("Erqiang", "Hu", email = "13766876214@163.com", role = "ctb"),
           person("Patrick", "Tung", email = "tung_patrick@yahoo.com", role = "ctb"),
@@ -19,18 +19,23 @@ Imports:
     RColorBrewer
 Suggests: 
     cowplot,
+    dplyr,
+    DT,
     ggplotify,
     grDevices,
     maps,
     magick,
     shiny,
+    shinyBS,
+    shinydashboard,
+    shinycssloaders,
     remotes,
     utils,
+    plotly,
     prettydoc,
     knitr,
     rmarkdown,
     reshape2,
-    dplyr,
     ggrepel,
     shadowtext,
     tidyr

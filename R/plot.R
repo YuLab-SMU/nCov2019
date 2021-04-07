@@ -13,6 +13,7 @@
 ##' @param title Title of the map.
 ##' @param type Specify the type of Statistics.
 ##' @param ... Additional parameters.
+##' @return A 'ggplot' object
 ##' @importFrom ggplot2 aes_
 ##' @importFrom ggplot2 map_data
 ##' @importFrom ggplot2 geom_map

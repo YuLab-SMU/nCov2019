@@ -1,7 +1,8 @@
 ##' @title Shiny app
 ##' @rdname dashboard
-#' @title Dashboard for nCov2019
+##' @title Dashboard for nCov2019
 ##' @description A dashboard app for nCov2019 package
+##' @return No return value, open shiny app
 #' @examples
 #' \dontrun{
 #' dashboard()
@@ -16,21 +17,24 @@ open_dashboard <- function() {
         package_no <-  package_need[!is.installed(package_need)]
         
         if(length(package_no) != 0 ) {
-            pa <- paste0(package_no,"\t")
-            messages2 <- "Running this shiny app requires some additional R packages, download them? (Y/N): "
-            ## button2 <- tcltk::tkmessageBox(title='Message', message=messages2, type='yesno')
-            ## button2 <- tcltk::tclvalue(button2)
-            button2 <- toupper(readline(prompt = messages2))
-            if(button2 == 'N'){
-                stop("Running this shiny app requires some additional R packages,",
-                    pa, ",please install them")
-                } else {
-                message("Running this shiny app requires some additional R packages,",
-                    pa, ",this will take some time")
-                # install packages from CRAN
-                ## sapply(package_no, utils::install.packages)
-                utils::install.packages(package_no)
-            }
+            ## pa <- paste0(package_no,"\t")
+            ## messages2 <- "Running this shiny app requires some additional R packages, download them? (Y/N): "
+            ## ## button2 <- tcltk::tkmessageBox(title='Message', message=messages2, type='yesno')
+            ## ## button2 <- tcltk::tclvalue(button2)
+            ## button2 <- toupper(readline(prompt = messages2))
+            ## if(button2 == 'N'){
+            ##     stop("Running this shiny app requires some additional R packages,",
+            ##         pa, ",please install them")
+            ##     } else {
+            ##     message("Running this shiny app requires some additional R packages,",
+            ##         pa, ",this will take some time")
+            ##     # install packages from CRAN
+            ##     ## sapply(package_no, utils::install.packages)
+            ##     utils::install.packages(package_no)
+            ## }
+            msg <- paste0("Running this shiny app requres several additional R packages to be installed:",
+                          "\n\t", paste0(package_no, collapse = ","))
+            stop(msg)
          }
         pos <- 1
         envir <- as.environment(pos)

@@ -65,6 +65,9 @@ If both from and to are specify, an animation will be created.}
 
 \item{fps}{fps of the animation, only works for animation}
 }
+\value{
+A 'ggplot' object
+}
 \description{
 plot map with ggplots, it is the core of plot.nCov2019 and Plot.nCov2019History.
 }

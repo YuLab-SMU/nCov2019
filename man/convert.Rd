@@ -9,6 +9,9 @@ convert(data)
 \arguments{
 \item{data}{users' own data, it should contain these 6 column: "country","province","date","cases","deaths","recovered".}
 }
+\value{
+a 'nCov2019History' object
+}
 \description{
 Convert users' own data into class of nCov2019History data. Then it could be used in nCov2019.
 }

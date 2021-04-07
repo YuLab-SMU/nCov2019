@@ -34,8 +34,13 @@ query <- function(){
     return(res)
 }
 
+##' Query global latest statistic for all contries
+##'
+##' 
 ##' @title Query the latest data online
+##' @return A 'nCov2019' object
 ##' @export
+##' @author Guangchuang Yu
 get_latest_data <- function() {
     url <- "https://disease.sh/v3/covid-19/countries?yesterday=1&twoDaysAgo=0&sort=todayCases"
     local <- file.path("local_storage","latest_data.json.gz")
