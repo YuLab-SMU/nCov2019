@@ -60,7 +60,13 @@ get_latest_data <- function() {
 
 
 
-# Query the global data online
+#' @title Query the global data online
+#' @return A 'global_summary' object
+#' @examples
+#' \dontrun{
+#' x <- get_global_data()
+#'}
+#' @export
 get_global_data <- function() {
     url <- "https://disease.sh/v3/covid-19/all?yesterday=false&twoDaysAgo=0"
     local <-  file.path("local_storage","global_data.json.gz")
@@ -73,7 +79,13 @@ get_global_data <- function() {
 }
 
 
-# Query the historical data online
+#' @title Query the historical data online
+#' @return A 'nCov2019History' object
+#' @examples
+#' \dontrun{
+#' x <- get_history_data()
+#'}
+#' @export
 get_history_data <- function() {
     url <- "https://disease.sh/v3/covid-19/historical?lastdays=all"
     local <-  file.path("local_storage","historical_data.json")
@@ -108,7 +120,13 @@ get_history_data <- function() {
 
 
 
-# Query the vaccine info online
+#' @title Query the vaccine info online
+#' @return A 'vaccine_therapeutics' object
+#' @examples
+#' \dontrun{
+#' x <- get_vaccine_data()
+#'}
+#' @export
 get_vaccine_data <- function() {
     url <- "https://disease.sh/v3/covid-19/vaccine"
     local <-  file.path("local_storage","vaccine_data.json.gz")
@@ -129,7 +147,13 @@ get_vaccine_data <- function() {
 }
 
 
-# Query the therapeutics info online
+#' @title Query the therapeutics info online
+#' @return A 'vaccine_therapeutics' object
+#' @examples
+#' \dontrun{
+#' x <- get_therapeutics_data()
+#'}
+#' @export
 get_therapeutics_data <- function() {
     url <- "https://disease.sh/v3/covid-19/therapeutics"
     local <-  file.path("local_storage","therapeutics_data.json.gz")

@@ -217,7 +217,7 @@ server <- function(input, output, session, ...) {
         x = df()
         valueBox(
             paste0(x[which(x$date == t),]$recovered, " Recovered"), 
-                    t, icon = icon("hospital"), color = "green")
+                    t, icon = icon("hospital"), color = "navy")
     })
 
     output$summary_dead <- renderValueBox({
@@ -225,7 +225,7 @@ server <- function(input, output, session, ...) {
         x = df()
         valueBox(
             paste0(x[which(x$date == t),]$deaths, " Deaths"), 
-                    t, icon = icon("skull-crossbones"), color = "red")
+                    t, icon = icon("skull-crossbones"), color = "maroon")
 })
 
 # Growth Curve
@@ -234,7 +234,7 @@ server <- function(input, output, session, ...) {
         x = gather(df(), curve, count, -date)
         p = ggplot(x, aes(date, log2(count), color = curve, Counts=count, Type=curve )) +
             geom_point() + geom_line() + xlab(NULL) + ylab("Log2 of count") +
-            scale_color_manual(values=c("#f39c12", "#dd4b39", "#00a65a")) +
+            scale_color_manual(values=c("#f39c12", "#d81b60", "#000080")) +
             theme_bw() + 
             theme(legend.position = "none") +
                 theme(axis.text = element_text(angle = 15, hjust = 1)) +
