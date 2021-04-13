@@ -7,6 +7,12 @@ library(plotly)
 library(dplyr)
 library(nCov2019)
 
+get_latest_data <- getFromNamespace("get_latest_data", "nCov2019")
+get_global_data <- getFromNamespace("get_global_data", "nCov2019")
+get_history_data <- getFromNamespace("get_history_data", "nCov2019")
+get_vaccine_data <- getFromNamespace("get_vaccine_data", "nCov2019")
+get_therapeutics_data <- getFromNamespace("get_therapeutics_data", "nCov2019")
+
 ui <- dashboardPage(
   dashboardHeader(title = "nCov2019 Dashboard"),
   dashboardSidebar(

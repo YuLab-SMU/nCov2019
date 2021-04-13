@@ -66,7 +66,6 @@ get_latest_data <- function() {
 #' \dontrun{
 #' x <- get_global_data()
 #'}
-#' @export
 get_global_data <- function() {
     url <- "https://disease.sh/v3/covid-19/all?yesterday=false&twoDaysAgo=0"
     local <-  file.path("local_storage","global_data.json.gz")
@@ -85,7 +84,6 @@ get_global_data <- function() {
 #' \dontrun{
 #' x <- get_history_data()
 #'}
-#' @export
 get_history_data <- function() {
     url <- "https://disease.sh/v3/covid-19/historical?lastdays=all"
     local <-  file.path("local_storage","historical_data.json")
@@ -126,7 +124,6 @@ get_history_data <- function() {
 #' \dontrun{
 #' x <- get_vaccine_data()
 #'}
-#' @export
 get_vaccine_data <- function() {
     url <- "https://disease.sh/v3/covid-19/vaccine"
     local <-  file.path("local_storage","vaccine_data.json.gz")
@@ -153,7 +150,6 @@ get_vaccine_data <- function() {
 #' \dontrun{
 #' x <- get_therapeutics_data()
 #'}
-#' @export
 get_therapeutics_data <- function() {
     url <- "https://disease.sh/v3/covid-19/therapeutics"
     local <-  file.path("local_storage","therapeutics_data.json.gz")
