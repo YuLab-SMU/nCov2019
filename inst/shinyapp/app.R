@@ -53,7 +53,7 @@ ui <- dashboardPage(
 
     fluidRow(
         # data table
-        box(title = "Historical Data Table",
+    shinydashboard::box(title = "Historical Data Table",
             solidHeader = T,
             width = 4,
             collapsible = T,
@@ -61,7 +61,7 @@ ui <- dashboardPage(
             style = "font-size: 70%;"),
 
         # line plot
-        box(title = "Cumulative Curve", solidHeader = T,
+    shinydashboard::box(title = "Cumulative Curve", solidHeader = T,
         width = 8, collapsible = T,
         shinycssloaders::withSpinner(plotlyOutput("line_plot")))
     ),  
@@ -83,24 +83,24 @@ ui <- dashboardPage(
         plotlyOutput("Global_plot",height = '600', width = 'auto')
         )),
       tabPanel("Vaccine Statisics", 
-            box(
+        shinydashboard::box(
             width = 12,
             collapsible = T,
             shinycssloaders::withSpinner(DT::dataTableOutput("vaccine_table")), 
             style = "font-size: 70%;")),
       tabPanel("Therapeutics Statisics", 
-            box(
+        shinydashboard::box(
             width = 12,
             collapsible = T,
             shinycssloaders::withSpinner(DT::dataTableOutput("therapeutics_table")), 
             style = "font-size: 70%;")),
       tabPanel("Medical Summary Table", 
-            box(title = "current therapeutics candidates ",
+        shinydashboard::box(title = "current therapeutics candidates ",
             width = 6,
             collapsible = T,
             shinycssloaders::withSpinner(DT::dataTableOutput("Summary_table1")), 
             style = "font-size: 70%;"),
-            box(title = "current vaccine candidates",
+        shinydashboard::box(title = "current vaccine candidates",
             width = 6,
             collapsible = T,
             shinycssloaders::withSpinner(DT::dataTableOutput("Summary_table2")), 
@@ -155,7 +155,7 @@ server <- function(input, output, session, ...) {
         therapeutics_data=res$therapeutics
 
     # update country list
-    country_list <- filter(lastest_data$table, updated == lastest_data$time) %>% 
+    country_list <- dplyr::filter(lastest_data$table, updated == lastest_data$time) %>% 
                             arrange(desc(cases)) %>% .$country
     updateSelectizeInput(session, 'country', choices = country_list, server = TRUE)
     
@@ -201,8 +201,7 @@ server <- function(input, output, session, ...) {
     historical_data$table %>%
     group_by(country) %>%
     arrange(country,date) %>%
-    # mutate(diff = cases - dplyr::lag(cases, default =  dplyr::first(cases))) -> a
-    mutate(diff = cases - lag(cases, default =  first(cases))) -> a
+    mutate(diff = cases -  dplyr::lag(cases, default =  dplyr::first(cases))) -> a
   # output data table
     output$data_table = DT::renderDataTable({
         validate(need(input$country != "", "Loading"))
@@ -327,7 +326,7 @@ server <- function(input, output, session, ...) {
         locations = ~ISO3
         )
         fig <- fig %>% colorbar(title = "cases" )
-        fig <- fig %>% layout(
+        fig <- fig %>% plotly::layout(
         title = '  ',
         geo = g
         ) 
