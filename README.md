@@ -25,9 +25,9 @@ Guangchuang YU and Tianzhi Wu
 <https://yulab-smu.top>
 
 
-If you use `nCov2019`, please cite the following preprint:
+If you use `nCov2019`, please cite the following article:
 
-Wu T, Hu E, Ge X<sup>\*</sup>, Yu G<sup>\*</sup>. 2021. nCov2019: an R package for studying the COVID-19 coronavirus pandemic. PeerJ 9:e11421 <https://doi.org/10.7717/peerj.11421>
+Wu T, Hu E, Ge X<sup>\*</sup>, Yu G<sup>\*</sup>. 2021. nCov2019: an R package for studying the COVID-19 coronavirus pandemic. __*PeerJ*__ 9:e11421 <https://doi.org/10.7717/peerj.11421>
 
 
 
