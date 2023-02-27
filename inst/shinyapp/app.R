@@ -10,8 +10,8 @@ library(nCov2019)
 get_latest_data <- getFromNamespace("get_latest_data", "nCov2019")
 get_global_data <- getFromNamespace("get_global_data", "nCov2019")
 get_history_data <- getFromNamespace("get_history_data", "nCov2019")
-get_vaccine_data <- getFromNamespace("get_vaccine_data", "nCov2019")
-get_therapeutics_data <- getFromNamespace("get_therapeutics_data", "nCov2019")
+#get_vaccine_data <- getFromNamespace("get_vaccine_data", "nCov2019")
+#get_therapeutics_data <- getFromNamespace("get_therapeutics_data", "nCov2019")
 
 ui <- dashboardPage(
   dashboardHeader(title = "nCov2019 Dashboard"),
@@ -82,30 +82,30 @@ ui <- dashboardPage(
         shinycssloaders::withSpinner(
         plotlyOutput("Global_plot",height = '600', width = 'auto')
         )),
-      tabPanel("Vaccine Statisics", 
-        shinydashboard::box(
-            width = 12,
-            collapsible = T,
-            shinycssloaders::withSpinner(DT::dataTableOutput("vaccine_table")), 
-            style = "font-size: 70%;")),
-      tabPanel("Therapeutics Statisics", 
-        shinydashboard::box(
-            width = 12,
-            collapsible = T,
-            shinycssloaders::withSpinner(DT::dataTableOutput("therapeutics_table")), 
-            style = "font-size: 70%;")),
-      tabPanel("Medical Summary Table", 
-        shinydashboard::box(title = "current therapeutics candidates ",
-            width = 6,
-            collapsible = T,
-            shinycssloaders::withSpinner(DT::dataTableOutput("Summary_table1")), 
-            style = "font-size: 70%;"),
-        shinydashboard::box(title = "current vaccine candidates",
-            width = 6,
-            collapsible = T,
-            shinycssloaders::withSpinner(DT::dataTableOutput("Summary_table2")), 
-            style = "font-size: 70%;")
-      ),
+     # tabPanel("Vaccine Statisics", 
+     #   shinydashboard::box(
+     #       width = 12,
+     #       collapsible = T,
+     #       shinycssloaders::withSpinner(DT::dataTableOutput("vaccine_table")), 
+     #       style = "font-size: 70%;")),
+     # tabPanel("Therapeutics Statisics", 
+     #   shinydashboard::box(
+     #       width = 12,
+     #       collapsible = T,
+     #       shinycssloaders::withSpinner(DT::dataTableOutput("therapeutics_table")), 
+     #       style = "font-size: 70%;")),
+     # tabPanel("Medical Summary Table", 
+     #   shinydashboard::box(title = "current therapeutics candidates ",
+     #       width = 6,
+     #       collapsible = T,
+     #       shinycssloaders::withSpinner(DT::dataTableOutput("Summary_table1")), 
+     #       style = "font-size: 70%;"),
+     #   shinydashboard::box(title = "current vaccine candidates",
+     #       width = 6,
+     #       collapsible = T,
+     #       shinycssloaders::withSpinner(DT::dataTableOutput("Summary_table2")), 
+     #       style = "font-size: 70%;")
+     # ),
       tabPanel("Active per Million", plotlyOutput("active_plot")),
       tabPanel("Deaths per Million", plotlyOutput("Mortality_plot")),
       tabPanel("Cor Plot", 
@@ -134,15 +134,15 @@ server <- function(input, output, session, ...) {
             global_data <- get_global_data()
             incProgress( message = "Querying the historical data")
             historical_data <- get_history_data()
-            incProgress(  message = "Querying the vaccine data")
-            vaccine_data <- get_vaccine_data()
-            incProgress( message = "Querying the therapeutics data")
-            therapeutics_data <- get_therapeutics_data()
+            #incProgress(  message = "Querying the vaccine data")
+            #vaccine_data <- get_vaccine_data()
+            #incProgress( message = "Querying the therapeutics data")
+            #therapeutics_data <- get_therapeutics_data()
             res = list(lastest=lastest_data,
                     global=global_data,
-                    historical=historical_data,
-                    vaccine=vaccine_data,
-                    therapeutics=therapeutics_data)
+                    #vaccine=vaccine_data,
+                    #therapeutics=therapeutics_data,
+                    historical=historical_data)
             return(res)
             })
             return(res)
@@ -411,8 +411,8 @@ server <- function(input, output, session, ...) {
         lastest_data=res$lastest
         global_data=res$global
         historical_data=res$historical
-        vaccine_data=res$vaccine
-        therapeutics_data=res$therapeutics
+        #vaccine_data=res$vaccine
+        #therapeutics_data=res$therapeutics
     })
 ### end
 }

@@ -21,16 +21,16 @@ query <- function(){
     global_data <- get_global_data();summary(global_data)
     message("Querying the historical data...")
     historical_data <- get_history_data()
-    message("Querying the vaccine data...")
-    vaccine_data <- get_vaccine_data();print(vaccine_data)
-    message("Querying the therapeutics data...")
-    therapeutics_data <- get_therapeutics_data();print(therapeutics_data)
+#    message("Querying the vaccine data...")
+#    vaccine_data <- get_vaccine_data();print(vaccine_data)
+#    message("Querying the therapeutics data...")
+#    therapeutics_data <- get_therapeutics_data();print(therapeutics_data)
     message("Query finish, each time you can launch query() to reflash the data")
     res = list(latest=latest_data,
                global=global_data,
-               historical=historical_data,
-               vaccine=vaccine_data,
-               therapeutics=therapeutics_data)
+               historical=historical_data)
+ #              vaccine=vaccine_data,
+ #              therapeutics=therapeutics_data)
     return(res)
 }
 

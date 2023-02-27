@@ -54,8 +54,8 @@ names(res)
 - `global`    The global overall summary statistic  
 - `latest`   The global latest statistic for all countries
 - `historical`    The historical statistic for all countries
-- `vaccine`   The current vaccine development progress
-- `therapeutics`    The current therapeutics development progress
+- ~~`vaccine`   The current vaccine development progress~~
+- ~~`therapeutics`    The current therapeutics development progress~~
 
 The `query()` only need to be performed once in a session, print each of statistic objects, users could get their update time. And for the `vaccine` and `therapeutics` query results, print them will return the candidates number.
 
@@ -133,7 +133,7 @@ head(Z["Global"])
 ```
 
 
-
+<div style="display:none">
 ### Vaccine and therapeutics data
 
 Users could check for the vaccine or therapeutics developing status.  Let x be the vaccine or therapeutics query result, then `summary()` will return the summary of their trial phase, and x["all"] or x["All"] will return the summary information, such as mechanism,  trial Phase, institutions and so on. Then the detail background info will return with provided id, for example x[ID="id3"] or simple as x["id3"].  The same operation could apply to therapeutics data.
@@ -153,7 +153,7 @@ summary(X)
 head(X["All"])
 X[ID="id1"] 
 ```
-
+</div>
 
 ## Visualization
 
