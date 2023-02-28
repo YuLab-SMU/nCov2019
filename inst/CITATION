@@ -1,14 +1,14 @@
 citHeader("To cite nCov2019 in publications use:")
 
 
-citEntry(
-    entry  = "article",
+bibentry(
+    bibtype  = "article",
     title  = "nCov2019: an R package for studying the COVID-19 coronavirus pandemic.",
-    author = personList(
-        as.person("Tianzhi Wu"),
-        as.person("Erqiang Hu"),
-        as.person("Xijin Ge"),
-        as.person("Guangchuang Yu")
+    author = c(
+        person("Tianzhi", "Wu"),
+        person("Erqiang", "Hu"),
+        person("Xijin", "Ge"),
+        person("Guangchuang", "Yu")
         ),
     year    = "2021",
     journal = "PeerJ",

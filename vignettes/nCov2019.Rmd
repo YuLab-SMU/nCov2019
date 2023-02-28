@@ -172,7 +172,8 @@ We provide a visualization function as a redesign "plot".
        ...
      )
 
-Here, type could be one of "cases","deaths","recovered","active","todayCases","todayDeaths","todayRecovered","population" and "tests". By default, color palette is "Reds", more color palettes can be found here: [palette](https://www.r-graph-gallery.com/38-rcolorbrewers-palettes.html)
+Here, type could be one of "cases","deaths","recovered","active","todayCases","todayDeaths","todayRecovered","population" and "tests". By default, color palette is "Reds", more color palettes can be found here: [palette](https://r-graph-gallery.com/38-rcolorbrewers-palettes.html).
+
 
 To get the overview for the latest status, the mini code required is as below:
 ```{r fig.height=8, fig.width=12, warning=FALSE}
@@ -473,3 +474,4 @@ Wu T, Hu E, Ge X<sup>\*</sup>, Yu G<sup>\*</sup>. 2021. nCov2019: an R package f
 ```{r}
 sessionInfo()
 ```
+

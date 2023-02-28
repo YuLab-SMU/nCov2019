@@ -28,10 +28,10 @@
 plot.nCov2019 <- function(x, region = "Global", continuous_scale = FALSE, palette = "Reds",
                           date = NULL, title = "COVID19", type = "cases", ... ) {
     country <- NULL
-    if (class(x) == "nCov2019"){
+    if (inherits(x, "nCov2019")){
     type_list = c("cases","deaths","recovered","active","todayCases",
                     "todayDeaths","todayRecovered","population","tests")
-    } else if(class(x) == "nCov2019History"){
+    } else if(inherits(x, "nCov2019History")){
         type_list = c("cases","deaths","recovered","active")
     }
     
@@ -53,7 +53,7 @@ plot.nCov2019 <- function(x, region = "Global", continuous_scale = FALSE, palett
     }
 
     # get the subset of one day for historical_data
-    if (class(x) == "nCov2019History"){
+    if (inherits(x, "nCov2019History")) {
         time = date
         dt = subset(x$table, date == time)
     } else{
