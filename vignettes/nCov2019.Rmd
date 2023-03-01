@@ -176,7 +176,7 @@ Here, type could be one of "cases","deaths","recovered","active","todayCases","t
 
 
 To get the overview for the latest status, the mini code required is as below:
-```{r fig.height=6, fig.width=10, , arning=FALSE}
+```{r fig.height=8, fig.width=12, dpi=50, arning=FALSE}
 X <- res$latest
 plot(X)
 ```
@@ -184,14 +184,14 @@ plot(X)
 
 
 Or To get the overview for the detection testing status, 
-```{r fig.height=6, fig.width=10, warning=FALSE}
+```{r fig.height=8, fig.width=12, dpi=50,warning=FALSE}
 plot(X, type="tests",palette="Green")
 ```
 
 
 
 It could be also intuitively compare the number of new confirmed cases per day among different countries.
-```{r fig.height=6, fig.width=10, warning=FALSE}
+```{r fig.height=8, fig.width=12, dpi=50,warning=FALSE}
 library(ggplot2)
 library(dplyr)
 X <- res$historical
@@ -210,7 +210,7 @@ ggplot(tmp,aes(date, log(diff+1), color=country)) + geom_line() +
 
 
 user could also plot the outbreak map on the past time with historical data by specify a date in function plot().
-```{r fig.height=6, fig.width=10, warning=FALSE}
+```{r fig.height=8, fig.width=12, dpi=50,warning=FALSE}
 Y <- res$historical
 plot(Y, region="Global" ,date = "2020-08-01", type="cases")
 ```
@@ -239,7 +239,7 @@ plot(y, from = from, to=to)
 
 If you wanted to visualize the cumulative summary data, an example plot could be the following:
 
-```{r fig.height=6, fig.width=10, warning=FALSE}
+```{r fig.height=8, fig.width=12, dpi=50,warning=FALSE}
 library(ggplot2)
 x <- res$historical
 d = x['Japan' ] # you can replace Anhui with any province
@@ -256,7 +256,7 @@ ggplot(d,
 ```
 
 Plot  the trend for for the Top 10  increase cases countries on last day
-```{r fig.height=8, fig.width=10, warning=FALSE}
+```{r fig.height=8, fig.width=10, dpi=50,warning=FALSE}
 library("dplyr")
 library("ggrepel")
 
@@ -305,7 +305,7 @@ ggplot(d, aes(date, count, color = curve)) + geom_point() + geom_line() +
 ## Heatmap for cases per country
 
 Here is the example code for draw a heatmap for the historical data range in nCov2019.
-```{r fig.height=15, fig.width=6, warning=FALSE}
+```{r fig.height=15, fig.width=6, dpi=50,warning=FALSE}
 library('tidyr')
 library('ggrepel')
 library('ggplot2')
@@ -334,7 +334,7 @@ ggplot(d, aes(date, country)) +
 ```
 
 Plot the global trend in a novel way.
-```{r fig.height=8, fig.width=8, warning=FALSE}
+```{r fig.height=10, fig.width=10, dpi=50,warning=FALSE}
 
 require(dplyr)
 
@@ -374,7 +374,7 @@ p
 
 
 Number of days since 1 million cases per country 
-```{r fig.height=6, fig.width=10, warning=FALSE}
+```{r fig.height=8, fig.width=12, dpi=50,warning=FALSE}
 require(dplyr)
 require(ggplot2)
 require(shadowtext)
